@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+}
+
+main {
+    position: absolute;
+    top: 100px;
+    bottom: 0;
+    width: 100%;
+    background-color: #0050FF;
+    padding: 120px;
+    text-align: center;
+    color: white;
+}
+
+main > h1 {
+    margin-bottom: 10px;
+}
+
+.header-flex-container {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    padding: 25px 40px;
+    background: white;
+}
+
+.header-flex-item-left {
+    flex-basis: 50%;
+}
+
+.mini-square {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 15px 15px 15px 0;
+    background: #0050FF;
+}
+
+.header-flex-item-left > h1 {
+    float: left;
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+.header-flex-item-left > h3 {
+    float: left;
+    margin: 10px 5px;
+    font-weight: 300;
+}
+
+h3 > b {
+    font-weight: 600;
+}
+
+.header-flex-item-right {
+    flex-basis: 50%;
+    text-align: right;
+}
+
+nav {
+    margin: 23px 0;
+}
+
+nav a {
+    padding: 15px 0;
+    border-top: 1px solid black;
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-active {
+    padding: 15px 20px;
+    border-top: 1px solid #0050FF;
+    box-shadow: inset 0px 10px 0px -6px #0050FF;
+    font-weight: 600;
+    color: #0050FF;
+}
+
+nav a:hover {
+    padding: 15px 20px;
+    border-top: 1px solid #0050FF;
+    box-shadow: inset 0px 10px 0px -6px #0050FF;
+    font-weight: 600;
+    color: #0050FF;
+}
+
+li {
+    display: inline;
+    list-style-type: none;
+    margin-left: 30px;
+}
