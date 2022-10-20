@@ -8,18 +8,14 @@
 }
 
 main {
-    position: absolute;
-    top: 100px;
-    bottom: 0;
-    width: 100%;
     background-color: #0050FF;
-    padding: 120px;
-    text-align: center;
+    padding: 60px;
     color: white;
 }
 
-main > h1 {
-    margin-bottom: 10px;
+header {
+    position: sticky;
+    top: 0;
 }
 
 .header-flex-container {
@@ -91,8 +87,71 @@ nav a:hover {
     color: #0050FF;
 }
 
-li {
+nav li {
     display: inline;
     list-style-type: none;
     margin-left: 30px;
+}
+
+.main-top-flex-container {
+    display: flex;
+    width: 100%;
+    height: 800px;
+}
+
+.main-top-flex-item-left {
+    flex-basis: 50%;
+    text-align: right;
+}
+
+.main-circle {
+    width: 150px;
+    height: 150px;
+    background: #FBFF00;
+    border-radius: 75px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.circle-hint {
+    position: absolute;
+    top: 220px;
+    left: calc(50% + 80px);
+    padding-left: 125px;
+}
+
+.circle-hint:before {
+    content:" ";
+    display: block;
+    height: 1px;
+    width: 120px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background: white;
+}
+
+.main-top-flex-item-left > h1 {
+    font-weight: 600;
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.main-top-flex-item-left > h2 {
+    font-weight: 400;
+    font-size: 25px;
+    margin-bottom: 2px;
+}
+
+.main-top-flex-item-left > h2 > strong {
+    font-weight: 600;
+    font-size: 25px;
+    background: #FBFF00;
+    color: #0050FF;
+}
+
+.main-top-flex-item-left li {
+    display: inline;
+    list-style-type: none;
+    margin-left: 10px;
 }
