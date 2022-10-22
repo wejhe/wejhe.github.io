@@ -16,6 +16,7 @@ main {
 header {
     position: sticky;
     top: 0;
+    z-index: 100;
 }
 
 ul {
@@ -170,28 +171,63 @@ nav li {
     margin-left: 10px;
 }
 
-.company-flex-container {
+.statement-flex-container {
     display: flex;
     width: 100%;
-    height: 200px;
+    height: 230px;
     background: #F0F8FF;
     margin-top: 70px;
     color: black;
-    padding: 55px 60px;
+    padding: 60px 60px;
 }
 
-.company-flex-item-left {
+.statement-flex-item-left {
     flex-basis: 50%;
-    text-align: center;
+    text-align: right;
     font-size: 14px;
 }
 
-.company-flex-item-left p {
-    margin-bottom: 30px;
+.statement-flex-item-left h2 {
+    position: relative;
+    padding-right: 55px;
+    margin-bottom: 12px;
 }
 
-.company-flex-item-left li {
+.statement-flex-item-left h2:after {
+    content: " ";
+    height: 1px;
+    width: 50px;
+    background: black;
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+
+.statement-flex-item-left p {
+    margin-bottom: 5px;
+}
+
+.company {
+    padding: 0 60px 60px 60px;
+    background: #F0F8FF;
+    text-align: center;
+}
+
+.company .fancy-box {
+    background: white;
+    color: black;
+    padding: 45px 0 50px 0;
+    border-radius: 20px;
+    box-shadow: 0 0 15px 0 rgba(183, 183, 183, 0.2);
+}
+
+.fancy-box p {
+    margin-bottom: 40px;
+}
+
+.fancy-box li {
     display: inline;
     list-style-type: none;
-    margin: 0 20px;
+    margin: 0 30px;
 }
