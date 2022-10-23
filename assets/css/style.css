@@ -160,7 +160,6 @@ nav li {
 
 .main-top-flex-item-left > h2 > strong {
     font-weight: 600;
-    font-size: 25px;
     background: #FBFF00;
     color: #0050FF;
 }
@@ -230,4 +229,52 @@ nav li {
     display: inline;
     list-style-type: none;
     margin: 0 30px;
+}
+
+@media screen and (max-width: 1280px) {    
+    .nav-active {
+        padding: 15px 10px;
+    }
+    
+    nav a:hover {
+        padding: 15px 10px;
+    }
+    
+    nav li {
+        margin-left: 20px;
+    }
+
+    .main-top-flex-container {
+        height: 240px;
+    }
+
+    .main-top-flex-item-left > h1 {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    .main-top-flex-item-left > h2 {
+        font-size: 23px;
+        margin-bottom: 3px;
+    }
+
+    .main-top-flex-item-left img {
+        width: 32px;
+    }
+
+    .statement-flex-container {
+        height: 200px;
+        margin-top: 70px;
+        padding: 50px 60px;
+    }
+
+    .statement-flex-item-left h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .statement-flex-item-left p {
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
 }
