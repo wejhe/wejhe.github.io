@@ -101,7 +101,7 @@ nav li {
 .main-top-flex-container {
     display: flex;
     width: 100%;
-    height: 330px;
+    height: calc(100vh - 100px - 60px - 150px - 40px);
     padding: 0 60px;
 }
 
@@ -117,7 +117,7 @@ nav li {
 
 .main-top-flex-item-right > img {
     margin-top: 15px;
-    height: 580px;
+    height: calc(100vh - 100px - 60px - 150px - 40px + 200px);
 }
 
 .main-circle {
@@ -150,13 +150,13 @@ nav li {
 .main-top-flex-item-left > h1 {
     font-weight: 600;
     font-size: 50px;
-    margin-bottom: 20px;
+    height: calc(26/100 * (100vh - 100px - 60px - 150px - 40px));
 }
 
 .main-top-flex-item-left > h2 {
     font-weight: 400;
     font-size: 25px;
-    margin-bottom: 5px;
+    height: calc(12/100 * (100vh - 100px - 60px - 150px - 40px));
 }
 
 .main-top-flex-item-left > h2 > strong {
@@ -176,9 +176,8 @@ nav li {
     width: 100%;
     height: 230px;
     background: #F0F8FF;
-    margin-top: 70px;
     color: black;
-    padding: 60px 60px;
+    padding: 70px 60px;
 }
 
 .statement-flex-item-left {
@@ -209,7 +208,7 @@ nav li {
 }
 
 .company {
-    padding: 0 60px 60px 60px;
+    padding: 20px 60px 60px 60px;
     background: #F0F8FF;
     text-align: center;
 }
@@ -246,17 +245,17 @@ nav li {
     }
 
     .main-top-flex-container {
-        height: 240px;
+        height: 310px;
     }
 
     .main-top-flex-item-left > h1 {
         font-size: 40px;
-        margin-bottom: 15px;
+        height: calc(26/100 * (310px));
     }
 
     .main-top-flex-item-left > h2 {
         font-size: 23px;
-        margin-bottom: 3px;
+        height: calc(12/100 * (310px));
     }
 
     .main-top-flex-item-left img {
@@ -270,8 +269,7 @@ nav li {
 
     .statement-flex-container {
         height: 200px;
-        margin-top: 70px;
-        padding: 50px 60px;
+        padding: 55px 60px;
     }
 
     .statement-flex-item-left h2 {
@@ -282,5 +280,11 @@ nav li {
     .statement-flex-item-left p {
         font-size: 13px;
         margin-bottom: 3px;
+    }
+
+    .company {
+        padding: 5px 60px 60px 60px;
+        background: #F0F8FF;
+        text-align: center;
     }
 }
