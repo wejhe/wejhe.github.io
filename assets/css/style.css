@@ -120,7 +120,7 @@ nav li {
     height: calc(100vh - 100px - 60px - 150px - 40px + 200px);
 }
 
-.main-circle {
+#main-circle {
     width: 150px;
     height: 150px;
     background: #FBFF00;
@@ -129,14 +129,14 @@ nav li {
     margin-bottom: 40px;
 }
 
-.circle-hint {
+#circle-hint {
     position: absolute;
     top: 220px;
     left: calc(50% + 80px);
     padding-left: 125px;
 }
 
-.circle-hint:before {
+#circle-hint:before {
     content:" ";
     display: block;
     height: 1px;
@@ -286,5 +286,22 @@ nav li {
         padding: 5px 60px 60px 60px;
         background: #F0F8FF;
         text-align: center;
+    }
+
+    .company .fancy-box {
+        padding: 40px 0 40px 0;
+    }
+
+    .fancy-box p {
+        font-size: 15px;
+        margin-bottom: 35px;
+    }
+
+    .company img {
+        height: 35px;
+    }
+
+    .fancy-box li {
+        margin: 0 25px;
     }
 }
