@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKUR - SKAI BCAS</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body onload="statusCheck()">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/function.js"></script>
+
+    <nav class="navbar bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="/index.html">
+                <img src="img/logo.png" alt="Logo" height="32px" class="d-inline-block align-text-top">
+                - Assessment Kinerja dan Ketaatan Prosedur
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h3 class="fw-bold">Selamat datang di Assessment Kinerja dan Ketaatan Prosedur (AKUR)</h3>
+                    <p>Silahkan isi data cabang anda terlebih dahulu!</p>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="namaCabang" class="form-label">Nama Kantor Cabang</label>
+                                    <select onchange="changeKodeCabang()" class="form-select" id="namaCabang">
+                                        <option value="" disabled selected>Silahkan pilih nama Kantor Cabang anda</option>
+                                        <option value="001">KC JATINEGARA JKT</option>
+                                        <option value="002">KC MANGGA DUA JKT</option>
+                                        <option value="003">KC SAMANHUDI JKT</option>
+                                        <option value="004">KC SUNTER JKT</option>
+                                        <option value="005">KC DHARMAWANGSA SBY</option>
+                                        <option value="006">KCP KENARI JKT</option>
+                                        <option value="007">KCP BEKASI JKT</option>
+                                        <option value="008">KCP KELAPA GADING</option>
+                                        <option value="009">KCP ULS TN ABANG</option>
+                                        <option value="010">KCP ULS MARGONDA DEPOK</option>
+                                        <option value="011">KCP ULS DARMO SURABAYA</option>
+                                        <option value="012">KCP ULS PONDOK INDAH</option>
+                                        <option value="013">KCP ULS TANGERANG</option>
+                                        <option value="014">KCP ULS BOGOR</option>
+                                        <option value="015">KCP ULS VETERAN</option>
+                                        <option value="016">KCP ULS SIDOARJO</option>
+                                        <option value="017">KCP ULS PASAR MINGGU</option>
+                                        <option value="018">KCP ULS CIMANGGIS</option>
+                                        <option value="019">KCP ULS TANJUNG PRIOK</option>
+                                        <option value="020">KCP ULS KAPAS KRAMPUNG</option>
+                                        <option value="021">KCP ULS PONDOK CHANDRA</option>
+                                        <option value="022">KCP ULS SEPANJANG</option>
+                                        <option value="023">KCP ULS MELAWAI</option>
+                                        <option value="024">KCP ULS GUDANG PELURU</option>
+                                        <option value="025">KCP ULS KEMANG MANSION</option>
+                                        <option value="026">KCP KRANJI BEKASI</option>
+                                        <option value="027">KCP PASAR ANYAR</option>
+                                        <option value="028">KCP CILEDUG TANGERANG</option>
+                                        <option value="029">KCP ULS PERAK BARAT</option>
+                                        <option value="030">KC SEMARANG</option>
+                                        <option value="031">KCP ULS JUANDA BEKASI</option>
+                                        <option value="032">KCP ULS GEDANGAN</option>
+                                        <option value="033">KCP ULS GRESIK</option>
+                                        <option value="034">KCP ULS MAJAPAHIT</option>
+                                        <option value="035">KC BANDUNG</option>
+                                        <option value="036">KCP ULS PURI INDAH</option>
+                                        <option value="037">KC SOLO</option>
+                                        <option value="038">KCP PONDOK GEDE</option>
+                                        <option value="039">KF BUR CIBINONG</option>
+                                        <option value="040">KCP CIKARANG SELATAN</option>
+                                        <option value="041">KCP ANYAR TANGERANG</option>
+                                        <option value="042">KCP CIPUTAT</option>
+                                        <option value="043">KCP DEPOK</option>
+                                        <option value="044">KCP CILEUNGSI</option>
+                                        <option value="045">KF BUR CIKARANG UTARA</option>
+                                        <option value="046">KC YOGYAKARTA</option>
+                                        <option value="047">KCP ULS PLUIT KENCANA</option>
+                                        <option value="048">KCP ULS SOLO SMT RYDI</option>
+                                        <option value="049">KCP ULS ASIA AFRIKA</option>
+                                        <option value="050">KC MEDAN</option>
+                                        <option value="051">KCP ULS BINTARO UTAMA</option>
+                                        <option value="052">KC PALEMBANG</option>
+                                        <option value="053">KCP MALANG</option>
+                                        <option value="054">KCP ULS KOTA BARU PRA</option>
+                                        <option value="055">KCP ULS SUDIRMAN YOG</option>
+                                        <option value="056">KCP ULS  KUDUS</option>
+                                        <option value="057">KCP ULS PEMUDA SEMARANG</option>
+                                        <option value="058">KCP ULS PANDAAN</option>
+                                        <option value="059">KCP ULS BUAH BATU</option>
+                                        <option value="060">KCP ULS SINGOSAREN SOLO</option>
+                                        <option value="061">KCP ULS SRAGEN SOLO</option>
+                                        <option value="062">KCP ULS MOJOKERTO</option>
+                                        <option value="063">KCP ULS KEPANJEN</option>
+                                        <option value="064">KCP ULS A RIVAI PLG</option>
+                                        <option value="065">KCP ULS BINTARO</option>
+                                        <option value="066">KC BANDAR LAMPUNG</option>
+                                        <option value="067">KC BANDA ACEH</option>
+                                        <option value="068">KCP KEDIRI</option>
+                                        <option value="069">KCP ULS ISKANDAR MUDA</option>
+                                        <option value="070">KCP PASURUAN</option>
+                                        <option value="071">KC PANAKKUKANG</option>
+                                        <option value="072">KCP LHOKSEUMAWE</option>
+                                        <option value="073">KCP KAS BIREUEN</option>
+                                        <option value="074">KCP ULS TAMAN PDK IDH SB</option>
+                                        <option value="075">KCP ULS SUDIRMAN PLG</option>
+                                        <option value="076">KCP BANYUWANGI</option>
+                                        <option value="077">KCP ULS CIMAHI</option>
+                                        <option value="078">KCP SUNGKONO SURABAYA</option>
+                                        <option value="079">KCP METRO LAMPUNG</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="kodeCabang" class="form-label">Kode Cabang</label>
+                                    <input type="text" class="form-control" id="kodeCabang" value="" disabled readonly>
+                                    <div id="kodeCabangHelp" class="form-text">*Kode cabang pada kolom isian berikut akan terisi secara otomatis setelah anda memilih salah satu nama Kantor Cabang.</div>
+                                </div>
+                                <button id="login" type="button" onclick="start()" class="btn btn-primary">Mulai Pengisian</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="logoutToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                <strong class="me-auto">Notifikasi Sistem</strong>
+                <small id="timestamp"></small>
+                <script>
+                    var timestamp = document.getElementById("timestamp");
+
+                    const now = new Date();
+                    var hours = now.getHours().toString();
+                    var minutes = now.getMinutes().toString();
+
+                    if (hours.length == 1) {
+                        hours = "0" + hours;
+                    }
+
+                    if (minutes.length == 1) {
+                        minutes = "0" + minutes;
+                    }
+
+                    timestamp.innerText = hours + " : " + minutes;
+                </script>
+            </div>
+            <div class="toast-body">
+                Anda berhasil logout!
+            </div>
+        </div>
+    </div>
+</body>
+</html>
