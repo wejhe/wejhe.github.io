@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKUR - SKAI BCAS</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body onload="showKuesioner()">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/localforage/dist/localforage.js"></script>
+    <script src="/dbconfig.js"></script>
+    <script src="/function.js"></script>
+
+    <div class="container-fluid bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col text-start">
+                    <a href="/home.html" id="home" class="btn btn-light" type="button"><i class="bi bi-house-door-fill me-2"></i></a>
+                </div>
+                <div class="col text-end">
+                    <button id="logout" onclick="logout()" class="btn btn-danger me-2" type="button"><i class="bi bi-escape me-2"></i>Keluar</button>
+                    <button class="btn btn-warning me-2" type="button" data-bs-toggle="modal" data-bs-target="#bantuan"><i class="bi bi-question-circle-fill me-2"></i>Bantuan</button>
+                    <button id="export" onclick="exportAKUR()" class="btn btn-success" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pastikan progress sudah 100% sebelum melakukan ekspor hasil AKUR"><i class="bi bi-envelope-arrow-down-fill me-2"></i>Ekspor Hasil AKUR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-dark py-3 fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col text-end">
+                    <button onclick="location = '/coso5/kuesioner1.html'" class="btn btn-primary bg-gradient me-2" type="button"><i class="bi bi-arrow-left-circle-fill me-2"></i>Sebelumnya</button>
+                </div>
+                <div class="col text-center">
+                    <select onchange="location = this.value;" class="form-select dropup" id="navigasi">
+                        <option id="progressCOSO11" value="/coso1/kuesioner1.html">COSO 1 - Kuesioner 1</option>
+                        <option id="progressCOSO12" value="/coso1/kuesioner2.html">COSO 1 - Kuesioner 2</option>
+                        <option id="progressCOSO13" value="/coso1/kuesioner3.html">COSO 1 - Kuesioner 3</option>
+                        <option id="progressCOSO14" value="/coso1/kuesioner4.html">COSO 1 - Kuesioner 4</option>
+                        <option id="progressCOSO15" value="/coso1/kuesioner5.html">COSO 1 - Kuesioner 5</option>
+                        <option id="progressCOSO16" value="/coso1/kuesioner6.html">COSO 1 - Kuesioner 6</option>
+                        <option id="progressCOSO17" value="/coso1/kuesioner7.html">COSO 1 - Kuesioner 7</option>
+                        <option id="progressCOSO21" value="/coso2/kuesioner1.html">COSO 2 - Kuesioner 1</option>
+                        <option id="progressCOSO31" value="/coso3/kuesioner1.html">COSO 3 - Kuesioner 1</option>
+                        <option id="progressCOSO32" value="/coso3/kuesioner2.html">COSO 3 - Kuesioner 2</option>
+                        <option id="progressCOSO33" value="/coso3/kuesioner3.html">COSO 3 - Kuesioner 3</option>
+                        <option id="progressCOSO34" value="/coso3/kuesioner4.html">COSO 3 - Kuesioner 4</option>
+                        <option id="progressCOSO35" value="/coso3/kuesioner5.html">COSO 3 - Kuesioner 5</option>
+                        <option id="progressCOSO41" value="/coso4/kuesioner1.html">COSO 4 - Kuesioner 1</option>
+                        <option id="progressCOSO42" value="/coso4/kuesioner2.html">COSO 4 - Kuesioner 2</option>
+                        <option id="progressCOSO51" value="/coso5/kuesioner1.html">COSO 5 - Kuesioner 1</option>
+                        <option id="progressCOSO52" value="/coso5/kuesioner2.html" selected>COSO 5 - Kuesioner 2</option>
+                    </select>
+                </div>
+                <div class="col text-start">
+                    <button onclick="" class="btn btn-secondary me-2" type="button" disabled>Selanjutnya<i class="bi bi-arrow-right-circle-fill ms-2"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="bantuan" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Panduan Pengisian AKUR</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                    Seluruh data yang telah anda isikan pada formulir AKUR ini akan dihapus.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Hubungi Kami</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <div class="form-text text-center text-black">Dipastikan bahwa surat atau informasi yang disampaikan kepada pihak lain telah memenuhi unsur pengamanan informasi, pengamanan data pribadi, dan tata cara profesional</div>
+                                </div>
+                                <hr>
+                                <div class="mb-3">
+                                    <div class="form-check form-switch d-inline-block align-middle">
+                                        <input onchange="toggleKuesioner1(), formValidation1()" class="form-check-input mt-2" type="checkbox" role="switch" id="toggle1">
+                                        <div class="form-text text-center">Sudah dilakukan? (N/Y)</div>
+                                    </div>
+                                </div>
+                                <div id="buktiPelaksanaan1" class="mb-3">
+                                    <div class="form-text mb-1">Bukti Pelaksanaan</div>
+                                    <input onchange="formValidation1()" id="buktiPelaksanaan1Value" class="form-control form-control-sm" type="file">
+                                </div>   
+                                <div id="rencanaTindakLanjut1" class="mb-3">
+                                    <div class="form-text mb-1">Rencana Tindak Lanjut</div>
+                                    <textarea onchange="formValidation1()" id="rencanaTindakLanjut1Value" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div id="targetPerbaikan1" class="mb-3">
+                                    <div class="form-text mb-1">Target Perbaikan</div>
+                                    <input onchange="formValidation1()" id="targetPerbaikan1Value" type="date" class="form-control form-control-sm" name="date">
+                                </div>
+                                <div class="d-grid">
+                                    <button onclick="simpanData1('52')" id="simpan1" class="btn btn-primary" type="button" disabled>Simpan</button>
+                                </div>
+                                <div class="d-grid">
+                                    <button onclick="resetData1('52')" id="reset1" class="btn btn-danger" type="button">Reset</button>
+                                </div>
+                                <script>
+                                    toggleKuesioner1();
+                                    loadData1('52');
+
+                                    function formValidation1() {
+                                        var toggle1 = document.getElementById("toggle1").checked;
+                                        var buktiPelaksanaan1Value = document.getElementById("buktiPelaksanaan1Value");
+                                        var rencanaTindakLanjut1Value = document.getElementById("rencanaTindakLanjut1Value");
+                                        var targetPerbaikan1Value = document.getElementById("targetPerbaikan1Value");
+                                        var simpan1 = document.getElementById("simpan1");
+
+                                        if (toggle1 === true) {
+                                            if(
+                                                buktiPelaksanaan1Value.value.length > 0
+                                            ) {
+                                                simpan1.removeAttribute("disabled");
+                                            } else {
+                                                simpan1.setAttribute("disabled", true);
+                                            }
+                                        } else {
+                                            if(
+                                                rencanaTindakLanjut1Value.value.length > 0
+                                                && targetPerbaikan1Value.value.length > 0
+                                            ) {
+                                                simpan1.removeAttribute("disabled");
+                                            } else {
+                                                simpan1.setAttribute("disabled", true);
+                                            }
+                                        }
+                                    }
+
+                                    function toggleKuesioner1() {
+                                        var toggle1 = document.getElementById("toggle1").checked;
+                                        var buktiPelaksanaan1 = document.getElementById("buktiPelaksanaan1");
+                                        var rencanaTindakLanjut1 = document.getElementById("rencanaTindakLanjut1");
+                                        var targetPerbaikan1 = document.getElementById("targetPerbaikan1");
+
+                                        if (toggle1 === true) {
+                                            buktiPelaksanaan1.removeAttribute("hidden");
+                                            rencanaTindakLanjut1.setAttribute("hidden", true);
+                                            targetPerbaikan1.setAttribute("hidden", true);
+                                        } else {
+                                            buktiPelaksanaan1.setAttribute("hidden", true);
+                                            rencanaTindakLanjut1.removeAttribute("hidden");
+                                            targetPerbaikan1.removeAttribute("hidden");
+                                        }
+                                    }
+                                </script>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <div class="form-text text-center text-black">Seluruh peralatan yang dipergunakan mengikuti standar TI, pemeliharaan antivirus secara berkala, dan peralatan cadangan terpelihara untuk kenyamanan nasabah</div>
+                                </div>
+                                <hr>
+                                <div class="mb-3">
+                                    <div class="form-check form-switch d-inline-block align-middle">
+                                        <input onchange="toggleKuesioner2(), formValidation2()" class="form-check-input mt-2" type="checkbox" role="switch" id="toggle2">
+                                        <div class="form-text text-center">Sudah dilakukan? (N/Y)</div>
+                                    </div>
+                                </div>
+                                <div id="buktiPelaksanaan2" class="mb-3">
+                                    <div class="form-text mb-1">Bukti Pelaksanaan</div>
+                                    <input onchange="formValidation2()" id="buktiPelaksanaan2Value" class="form-control form-control-sm" type="file">
+                                </div>   
+                                <div id="rencanaTindakLanjut2" class="mb-3">
+                                    <div class="form-text mb-1">Rencana Tindak Lanjut</div>
+                                    <textarea onchange="formValidation2()" id="rencanaTindakLanjut2Value" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div id="targetPerbaikan2" class="mb-3">
+                                    <div class="form-text mb-1">Target Perbaikan</div>
+                                    <input onchange="formValidation2()" id="targetPerbaikan2Value" type="date" class="form-control form-control-sm" name="date">
+                                </div>
+                                <div class="d-grid">
+                                    <button onclick="simpanData2('52')" id="simpan2" class="btn btn-primary" type="button" disabled>Simpan</button>
+                                </div>
+                                <div class="d-grid">
+                                    <button onclick="resetData2('52')" id="reset2" class="btn btn-danger" type="button">Reset</button>
+                                </div>
+                                <script>
+                                    toggleKuesioner2();
+                                    loadData2('52');
+
+                                    function formValidation2() {
+                                        var toggle2 = document.getElementById("toggle2").checked;
+                                        var buktiPelaksanaan2Value = document.getElementById("buktiPelaksanaan2Value");
+                                        var rencanaTindakLanjut2Value = document.getElementById("rencanaTindakLanjut2Value");
+                                        var targetPerbaikan2Value = document.getElementById("targetPerbaikan2Value");
+                                        var simpan2 = document.getElementById("simpan2");
+
+                                        if (toggle2 === true) {
+                                            if(
+                                                buktiPelaksanaan2Value.value.length > 0
+                                            ) {
+                                                simpan2.removeAttribute("disabled");
+                                            } else {
+                                                simpan2.setAttribute("disabled", true);
+                                            }
+                                        } else {
+                                            if(
+                                                rencanaTindakLanjut2Value.value.length > 0
+                                                && targetPerbaikan2Value.value.length > 0
+                                            ) {
+                                                simpan2.removeAttribute("disabled");
+                                            } else {
+                                                simpan2.setAttribute("disabled", true);
+                                            }
+                                        }
+                                    }
+
+                                    function toggleKuesioner2() {
+                                        var toggle2 = document.getElementById("toggle2").checked;
+                                        var buktiPelaksanaan2 = document.getElementById("buktiPelaksanaan2");
+                                        var rencanaTindakLanjut2 = document.getElementById("rencanaTindakLanjut2");
+                                        var targetPerbaikan2 = document.getElementById("targetPerbaikan2");
+
+                                        if (toggle2 === true) {
+                                            buktiPelaksanaan2.removeAttribute("hidden");
+                                            rencanaTindakLanjut2.setAttribute("hidden", true);
+                                            targetPerbaikan2.setAttribute("hidden", true);
+                                        } else {
+                                            buktiPelaksanaan2.setAttribute("hidden", true);
+                                            rencanaTindakLanjut2.removeAttribute("hidden");
+                                            targetPerbaikan2.removeAttribute("hidden");
+                                        }
+                                    }
+                                </script>
+                            </form>
+                        </div>
+                    </div>  
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <div class="form-text text-center text-black">Seluruh petugas telah mengikuti pelatihan internal dan refreshment sehingga dapat mengelola akses pribadi secara benar (pengelolaan password, pemegang kunci, dan restricted area)</div>
+                                </div>
+                                <hr>
+                                <div class="mb-3">
+                                    <div class="form-check form-switch d-inline-block align-middle">
+                                        <input onchange="toggleKuesioner3(), formValidation3()" class="form-check-input mt-2" type="checkbox" role="switch" id="toggle3">
+                                        <div class="form-text text-center">Sudah dilakukan? (N/Y)</div>
+                                    </div>
+                                </div>
+                                <div id="buktiPelaksanaan3" class="mb-3">
+                                    <div class="form-text mb-1">Bukti Pelaksanaan</div>
+                                    <input onchange="formValidation3()" id="buktiPelaksanaan3Value" class="form-control form-control-sm" type="file">
+                                </div>   
+                                <div id="rencanaTindakLanjut3" class="mb-3">
+                                    <div class="form-text mb-1">Rencana Tindak Lanjut</div>
+                                    <textarea onchange="formValidation3()" id="rencanaTindakLanjut3Value" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div id="targetPerbaikan3" class="mb-3">
+                                    <div class="form-text mb-1">Target Perbaikan</div>
+                                    <input onchange="formValidation3()" id="targetPerbaikan3Value" type="date" class="form-control form-control-sm" name="date">
+                                </div>
+                                <div class="d-grid">
+                                    <button onclick="simpanData3('52')" id="simpan3" class="btn btn-primary" type="button" disabled>Simpan</button>
+                                </div>
+                                <div class="d-grid">
+                                    <button onclick="resetData3('52')" id="reset3" class="btn btn-danger" type="button">Reset</button>
+                                </div>
+                                <script>
+                                    toggleKuesioner3();
+                                    loadData3('52');
+
+                                    function formValidation3() {
+                                        var toggle3 = document.getElementById("toggle3").checked;
+                                        var buktiPelaksanaan3Value = document.getElementById("buktiPelaksanaan3Value");
+                                        var rencanaTindakLanjut3Value = document.getElementById("rencanaTindakLanjut3Value");
+                                        var targetPerbaikan3Value = document.getElementById("targetPerbaikan3Value");
+                                        var simpan3 = document.getElementById("simpan3");
+
+                                        if (toggle3 === true) {
+                                            if(
+                                                buktiPelaksanaan3Value.value.length > 0
+                                            ) {
+                                                simpan3.removeAttribute("disabled");
+                                            } else {
+                                                simpan3.setAttribute("disabled", true);
+                                            }
+                                        } else {
+                                            if(
+                                                rencanaTindakLanjut3Value.value.length > 0
+                                                && targetPerbaikan3Value.value.length > 0
+                                            ) {
+                                                simpan3.removeAttribute("disabled");
+                                            } else {
+                                                simpan3.setAttribute("disabled", true);
+                                            }
+                                        }
+                                    }
+
+                                    function toggleKuesioner3() {
+                                        var toggle3 = document.getElementById("toggle3").checked;
+                                        var buktiPelaksanaan3 = document.getElementById("buktiPelaksanaan3");
+                                        var rencanaTindakLanjut3 = document.getElementById("rencanaTindakLanjut3");
+                                        var targetPerbaikan3 = document.getElementById("targetPerbaikan3");
+
+                                        if (toggle3 === true) {
+                                            buktiPelaksanaan3.removeAttribute("hidden");
+                                            rencanaTindakLanjut3.setAttribute("hidden", true);
+                                            targetPerbaikan3.setAttribute("hidden", true);
+                                        } else {
+                                            buktiPelaksanaan3.setAttribute("hidden", true);
+                                            rencanaTindakLanjut3.removeAttribute("hidden");
+                                            targetPerbaikan3.removeAttribute("hidden");
+                                        }
+                                    }
+                                </script>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+</body>
+</html>
