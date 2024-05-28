@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKUR - SKAI BCAS</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/localforage/dist/localforage.js"></script>
+    <script src="/dbconfig.js"></script>
+    <script src="/function.js"></script>
+
+    <nav class="navbar bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="/index.html">
+                <img src="img/logo.png" alt="Logo" height="32px" class="d-inline-block align-text-top">
+                - Assessment Kinerja dan Ketaatan Prosedur
+            </a>
+        </div>
+    </nav>
+
+    <div id="loginForm" class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <div class="card my-5">
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="jsonFile" class="form-label">JSON File</label>
+                                <input onchange="formValidation()" id="jsonFile" class="form-control" type="file">
+                                <script>
+                                    function formValidation() {
+                                        var jsonFile = document.getElementById("jsonFile");
+                                        var showResult = document.getElementById("showResult");
+                                        if (jsonFile.value.length > 0) {
+                                            showResult.removeAttribute("disabled");
+                                        } else {
+                                            showResult.setAttribute("disabled", true);
+                                        }
+                                    }
+                                </script>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password">
+                                <div id="kodeCabangHelp" class="form-text">*File JSON yang telah diimpor melalui formulir ini hanya akan diproses apabila anda memasukkan password admin SKAI dengan benar.</div>
+                            </div>
+                            <button id="showResult" type="button" onclick="show()" class="btn btn-primary me-2" disabled>Proses File JSON</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <div id="resultHeader" class="container-fluid py-5" hidden>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h3 class="fw-bold" id="header"></h3>
+                    <p id="subHeader">Berikut merupakan hasil analisis terhadap proses self assessment (AKUR) yang telah dilakukan oleh</p>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body pb-4 px-4">
+                            <div class="col text-start">
+                                <label id="progressOverallLabel" for="progressOverall" class="form-label">Profil Risiko = <b id="profilRisiko"></b></label>
+                            </div>
+                            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="height: 24px">
+                                <div id="scoreBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultBody" class="container-fluid" hidden>
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table align-middle table-bordered">
+                    <thead class="table-dark align-middle text-center">
+                        <tr>
+                            <th scope="col">Kuesioner</th>
+                            <th scope="col">Aktivitas</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Rencana Tindak Lanjut</th>
+                            <th scope="col">Target Perbaikan</th>
+                            <th scope="col">Bukti Pelaksanaan</th>
+                            <th scope="col">Skor Kuesioner</th>
+                            <th scope="col">Risiko</th>
+                            <th scope="col">Skor Akhir</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center" style="font-size: small;">
+                        <!--COSO11-->
+                        <tr class="table-primary">
+                            <td colspan="9">COSO 1 - Pengawasan oleh Manajemen dan Budaya Pengendalian</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">Dalam periode kerja .... telah dilakukan kordinasi pengelolaan bisnis dan tertuang pada Rencana Kerja Cabang</td>
+                            <td>Menetapkan rencana kerja dan komitmen pencapaian kepada seluruh pekerja</td>
+                            <td id="status111">status</td>
+                            <td id="rencana111">rencana</td>
+                            <td id="target111">target</td>
+                            <td id="bukti111">bukti</td>
+                            <td id="skor11" rowspan="3">skor</td>
+                            <td id="risiko11" rowspan="3">M</td>
+                            <td id="skorAkhir11" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Pengembangan bisnis mempertimbangkan potensi wilayah, kinerja, dan target secara agresif</td>
+                            <td id="status112">status</td>
+                            <td id="rencana112">rencana</td>
+                            <td id="target112">target</td>
+                            <td id="bukti112">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Mengumpulkan data dan analisa kajian potensi bisnis dan dilakukan pembahasan internal</td>
+                            <td id="status113">status</td>
+                            <td id="rencana113">rencana</td>
+                            <td id="target113">target</td>
+                            <td id="bukti113">bukti</td>
+                        </tr>
+                        <!--COSO12-->
+                        <tr>
+                            <td rowspan="3">Monitoring pencapaian, koordinasi, dan pembinaan</td>
+                            <td>Pendampingan terhadap para Account Officer (AO) atau inisiatif kunjungan terhadap nasabah potensial dan nasabah prioritas</td>
+                            <td id="status121">status</td>
+                            <td id="rencana121">rencana</td>
+                            <td id="target121">target</td>
+                            <td id="bukti121">bukti</td>
+                            <td id="skor12" rowspan="3">skor</td>
+                            <td id="risiko12" rowspan="3">M</td>
+                            <td id="skorAkhir12" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Pelaksanaan layanan dilakukan secara profesional, memenuhi SLA, menghindari benturan-benturan kepentingan, dan transparan</td>
+                            <td id="status122">status</td>
+                            <td id="rencana122">rencana</td>
+                            <td id="target122">target</td>
+                            <td id="bukti122">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Setiap pengajuan data pipe line telah dilakukan validasi untuk meyakini bahwa informasi yang disampaikan valid dan efektif</td>
+                            <td id="status123">status</td>
+                            <td id="rencana123">rencana</td>
+                            <td id="target123">target</td>
+                            <td id="bukti123">bukti</td>
+                        </tr>
+                        <!--COSO13-->
+                        <tr>
+                            <td rowspan="3">Seluruh pekerja memahami rencana kerja dan target yang akan dicapai dan bertanggungjawab untuk pemenuhan termasuk sanksi atas pelanggaran maupun kelemahan prosedural</td>
+                            <td>Seluruh petugas dapat saling melengkapi dalam pelaksanaan prosedur yang berlaku sebagai panduan membina hubungan usaha</td>
+                            <td id="status131">status</td>
+                            <td id="rencana131">rencana</td>
+                            <td id="target131">target</td>
+                            <td id="bukti131">bukti</td>
+                            <td id="skor13" rowspan="3">skor</td>
+                            <td id="risiko13" rowspan="3">M</td>
+                            <td id="skorAkhir13" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Kegiatan operasional untuk mendukung bisnis dilakukan dengan cara-cara yang terkendali, memperhitungkan prospek, serta cost & benefit yang memadai</td>
+                            <td id="status132">status</td>
+                            <td id="rencana132">rencana</td>
+                            <td id="target132">target</td>
+                            <td id="bukti132">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Seluruh pekerja mendukung program kerja perusahaan dan cabang serta memelihara hubungan usaha dengan nasabah maupun BCA sebagai mitra usaha dengan cara yang tepat dan tidak terjadi pelanggaran</td>
+                            <td id="status133">status</td>
+                            <td id="rencana133">rencana</td>
+                            <td id="target133">target</td>
+                            <td id="bukti133">bukti</td>
+                        </tr>
+                        <!--COSO14-->
+                        <tr>
+                            <td rowspan="3">Fasilitas nasabah maupun pekerja yang tersedia berfungsi optimal dan memenuhi unsur kenyamanan</td>
+                            <td>Jam layanan cabang terpenuhi dan tidak ada penundaan transaksi</td>
+                            <td id="status141">status</td>
+                            <td id="rencana141">rencana</td>
+                            <td id="target141">target</td>
+                            <td id="bukti141">bukti</td>
+                            <td id="skor14" rowspan="3">skor</td>
+                            <td id="risiko14" rowspan="3">L</td>
+                            <td id="skorAkhir14" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Fasilitas pendukung layanan seperti mesin hitung uang, KTP Reader, PinPad, dan formulir cukup tersedia sesuai kebutuhan</td>
+                            <td id="status142">status</td>
+                            <td id="rencana142">rencana</td>
+                            <td id="target142">target</td>
+                            <td id="bukti142">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Kondisi fasilitas umum seperti area parkir, ruang tunggu, toilet, kenyamanan suhu ruang, dan kondisi peralatan di area nasabah terpelihara dengan baik</td>
+                            <td id="status143">status</td>
+                            <td id="rencana143">rencana</td>
+                            <td id="target143">target</td>
+                            <td id="bukti143">bukti</td>
+                        </tr>
+                        <!--COSO15-->
+                        <tr>
+                            <td rowspan="3">Pengelolaan pekerja dalam hal pemenuhan hak dan kewajiban masing-masing pihak, hubungan dan suasana kerja yang harmonis</td>
+                            <td>Upaya preventif telah dilakukan antara lain melalui SLIK, cuti wajib, dan rotasi</td>
+                            <td id="status151">status</td>
+                            <td id="rencana151">rencana</td>
+                            <td id="target151">target</td>
+                            <td id="bukti151">bukti</td>
+                            <td id="skor15" rowspan="3">skor</td>
+                            <td id="risiko15" rowspan="3">M</td>
+                            <td id="skorAkhir15" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Melakukan komunikasi secara berkala dengan pekerja untuk mengetahui potensi, KYE, atau problem kerja yang belum terselesaikan</td>
+                            <td id="status152">status</td>
+                            <td id="rencana152">rencana</td>
+                            <td id="target152">target</td>
+                            <td id="bukti152">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Pekerja diberi kesempatan untuk memanfaatkan benefit dari perusahaan termasuk CATAPA, asuransi, pinjaman amanah, dan pembinaan yang diperlukan</td>
+                            <td id="status153">status</td>
+                            <td id="rencana153">rencana</td>
+                            <td id="target153">target</td>
+                            <td id="bukti153">bukti</td>
+                        </tr>
+                        <!--COSO16-->
+                        <tr>
+                            <td rowspan="3">Pengamanan gedung kantor beserta isinya selalu diperhatikan untuk mendukung kegiatan operasional bank berlangsung lancar sesuai waktu layanan</td>
+                            <td>Pengelolaan berkala dilakukan dengan baik menggunakan register yang berisi riwayat pengelolaan secara dual control atau dual custody</td>
+                            <td id="status161">status</td>
+                            <td id="rencana161">rencana</td>
+                            <td id="target161">target</td>
+                            <td id="bukti161">bukti</td>
+                            <td id="skor16" rowspan="3">skor</td>
+                            <td id="risiko16" rowspan="3">L</td>
+                            <td id="skorAkhir16" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Seluruh kegiatan operasional bank dapat dijalankan dengan baik, hubungan kerja dan pemenuhan kewajiban dengan pihak pemerintah setempat terpenuhi, serta tidak ada sanksi atau denda</td>
+                            <td id="status162">status</td>
+                            <td id="rencana162">rencana</td>
+                            <td id="target162">target</td>
+                            <td id="bukti162">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Seluruh perlengkapan dan peralatan pendukung operasional cabang yang berisiko seperti penyimpanan arsip, khasanah, dan persediaan barang terkelola dengan baik dan benar</td>
+                            <td id="status163">status</td>
+                            <td id="rencana163">rencana</td>
+                            <td id="target163">target</td>
+                            <td id="bukti163">bukti</td>
+                        </tr>
+                        <!--COSO17-->
+                        <tr>
+                            <td rowspan="3">Pengawasan aktivitas operasional seperti kunjungan dan pemantauan berkala aktivitas cabang anak, kepatuhan atas prosedur layanan dan produk, serta pemeliharaan data nasabah</td>
+                            <td>Seluruh kegiatan cabang dan anak cabang berada dalam koordinasi yang terkendali, melakukan kunjungan secara tidak terjadwal, memberikan arahan, pembekalan, dan pembinaan-pembinaan lanjutan yang diperlukan</td>
+                            <td id="status171">status</td>
+                            <td id="rencana171">rencana</td>
+                            <td id="target171">target</td>
+                            <td id="bukti171">bukti</td>
+                            <td id="skor17" rowspan="3">skor</td>
+                            <td id="risiko17" rowspan="3">L</td>
+                            <td id="skorAkhir17" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Meyakini bahwa seluruh petugas memahami tugas dan tanggungjawab, pemisahan fungsi dan kewenangan, serta mengikuti ketentuan berlaku atau berdasarkan persetujuan pihak yang mempunyai kewenangan sehingga tidak ditemukan adanya kegagalan proses berisiko tinggi</td>
+                            <td id="status172">status</td>
+                            <td id="rencana172">rencana</td>
+                            <td id="target172">target</td>
+                            <td id="bukti172">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Melakukan pengawasan terhadap pemeliharaan hubungan usaha dengan nasabah, aktivitas layanan, pemasaran produk, profil nasabah, serta rekening dormant dengan konsisten</td>
+                            <td id="status173">status</td>
+                            <td id="rencana173">rencana</td>
+                            <td id="target173">target</td>
+                            <td id="bukti173">bukti</td>
+                        </tr>
+                        <!--COSO21-->
+                        <tr class="table-primary">
+                            <td colspan="9">COSO 2 - Kegiatan Pengendalian</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">Pencapaian bisnis pembiayaan dan DPK memperhatikan budget masing-masing kantor cabang</td>
+                            <td>Mengarahkan kegiatan finasial debitur dilayani melalui BCA Syariah sehingga perkembangan usaha lebih terpantau</td>
+                            <td id="status211">status</td>
+                            <td id="rencana211">rencana</td>
+                            <td id="target211">target</td>
+                            <td id="bukti211">bukti</td>
+                            <td id="skor21" rowspan="3">skor</td>
+                            <td id="risiko21" rowspan="3">M</td>
+                            <td id="skorAkhir21" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Strategi pencapaian target bisnis prioritas pada pipeline yang disepakati dan penetrasi pasar lebih luas melalui penambahan jumlah debitur (tidak bergantung pada debitur inti)</td>
+                            <td id="status212">status</td>
+                            <td id="rencana212">rencana</td>
+                            <td id="target212">target</td>
+                            <td id="bukti212">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Lakukan strategi evaluasi dan re-alokasi budget sesuai kebutuhan serta komunikasikan strategi terbaru bagi seluruh team</td>
+                            <td id="status213">status</td>
+                            <td id="rencana213">rencana</td>
+                            <td id="target213">target</td>
+                            <td id="bukti213">bukti</td>
+                        </tr>
+                        <!--COSO31-->
+                        <tr class="table-primary">
+                            <td colspan="9">COSO 3 - Penilaian Risiko</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">Pemeliharaan performa debitur untuk menjaga dan meningkatkan kualitas pembiayaan</td>
+                            <td>Melakukan monitoring dan meyakini secara periodik melalui kunjungan debitur yang terdokumentasi</td>
+                            <td id="status311">status</td>
+                            <td id="rencana311">rencana</td>
+                            <td id="target311">target</td>
+                            <td id="bukti311">bukti</td>
+                            <td id="skor31" rowspan="3">skor</td>
+                            <td id="risiko31" rowspan="3">MH</td>
+                            <td id="skorAkhir31" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Melakukan monitoring per bulan dan mengantisipasi pemburukan melalui komunikasi dengan debitur</td>
+                            <td id="status312">status</td>
+                            <td id="rencana312">rencana</td>
+                            <td id="target312">target</td>
+                            <td id="bukti312">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Melakukan monitoring, kunjungan, tindak lanjut sesuai kebutuhan untuk menjaga performa dan hubungan usaha dengan debitur atau nasabah</td>
+                            <td id="status313">status</td>
+                            <td id="rencana313">rencana</td>
+                            <td id="target313">target</td>
+                            <td id="bukti313">bukti</td>
+                        </tr>
+                        <!--COSO32-->
+                        <tr>
+                            <td rowspan="3">Mengelola portofolio debitur baru maupun existing untuk meningkatkan kualitas kerjasama dan memenuhi kelengkapan dokumen pembiayaan</td>
+                            <td>Menjadikan target CASA pada seluruh debitur melalui komunikasi dan monitoring aktif</td>
+                            <td id="status321">status</td>
+                            <td id="rencana321">rencana</td>
+                            <td id="target321">target</td>
+                            <td id="bukti321">bukti</td>
+                            <td id="skor32" rowspan="3">skor</td>
+                            <td id="risiko32" rowspan="3">M</td>
+                            <td id="skorAkhir32" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Meyakini bahwa seluruh debitur yang telah mendapatkan pembiayaan dimanfaatkan sesuai tujuan, dalam pengawasan, serta dokumen agunan lengkap dan benar</td>
+                            <td id="status322">status</td>
+                            <td id="rencana322">rencana</td>
+                            <td id="target322">target</td>
+                            <td id="bukti322">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Melakukan pemeriksaan silang dan/atau antisipasi terhadap debitur yang diketahui terjadi penurunan kualitas atau kondisi yang tidak normal (SLIK, informasi negatif, bencana)</td>
+                            <td id="status323">status</td>
+                            <td id="rencana323">rencana</td>
+                            <td id="target323">target</td>
+                            <td id="bukti323">bukti</td>
+                        </tr>
+                        <!--COSO33-->
+                        <tr>
+                            <td rowspan="3">Pengelolaan portofolio CASA dalam hal peningkatan kuantitas dan kualitas portofolio CASA</td>
+                            <td>Menjalankan instruksi nasabah dengan profesional dan tidak ditemukan adanya kesalahan proses yang berdampak pada kerugian nasabah maupun bank</td>
+                            <td id="status331">status</td>
+                            <td id="rencana331">rencana</td>
+                            <td id="target331">target</td>
+                            <td id="bukti331">bukti</td>
+                            <td id="skor33" rowspan="3">skor</td>
+                            <td id="risiko33" rowspan="3">M</td>
+                            <td id="skorAkhir33" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Memelihara pencapaian CASA dengan program aktif kunjungan atau pengadaan program</td>
+                            <td id="status332">status</td>
+                            <td id="rencana332">rencana</td>
+                            <td id="target332">target</td>
+                            <td id="bukti332">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Memperhatikan pergerakan CASA untuk menghindari arus keluar berkelanjutan</td>
+                            <td id="status333">status</td>
+                            <td id="rencana333">rencana</td>
+                            <td id="target333">target</td>
+                            <td id="bukti333">bukti</td>
+                        </tr>
+                        <!--COSO34-->
+                        <tr>
+                            <td rowspan="3">Pengelolaan DPK (Dana Pihak Ketiga) dalam hal strategi mengelola rekening dana mahal</td>
+                            <td>Memelihara deposito atau giro nisbah khusus diluar kewenangan cabang secara hati-hati dan terkendali</td>
+                            <td id="status341">status</td>
+                            <td id="rencana341">rencana</td>
+                            <td id="target341">target</td>
+                            <td id="bukti341">bukti</td>
+                            <td id="skor34" rowspan="3">skor</td>
+                            <td id="risiko34" rowspan="3">L</td>
+                            <td id="skorAkhir34" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Memelihara DPK dengan memperhatikan FDR yang efektif sehinggga tidak membebani RAK</td>
+                            <td id="status342">status</td>
+                            <td id="rencana342">rencana</td>
+                            <td id="target342">target</td>
+                            <td id="bukti342">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Evaluasi penurunan CASA deposito yang tidak diikuti dengan penambahan produk atau rekening baru</td>
+                            <td id="status343">status</td>
+                            <td id="rencana343">rencana</td>
+                            <td id="target343">target</td>
+                            <td id="bukti343">bukti</td>
+                        </tr>
+                        <!--COSO35-->
+                        <tr>
+                            <td rowspan="3">Pengawasan aktivitas kerja bisnis antara lain dengan pemantauan pengelolaan debitur melalui BCR, debitur dalam perhatian, dan pengolahan proposal</td>
+                            <td>Realisasi pencairan dana pembiayaan diikuti dengan dokumen-dokumen yang lengkap dan benar serta dilakukan pemantauan pemanfaatan dana agar sesuai dengan tujuan awal dan dituangkan dalam kartu debitur atau sejenis untuk diketahui oleh pimpinan cabang setempat</td>
+                            <td id="status351">status</td>
+                            <td id="rencana351">rencana</td>
+                            <td id="target351">target</td>
+                            <td id="bukti351">bukti</td>
+                            <td id="skor35" rowspan="3">skor</td>
+                            <td id="risiko35" rowspan="3">M</td>
+                            <td id="skorAkhir35" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Pemantauan pengolahan pembiayaan termasuk trade checking atau pemeriksaan silang data pengelola dilakukan dengan tepat dan benar untuk meyakini keabsahan dokumen-dokumen pendukung pembiayaan</td>
+                            <td id="status352">status</td>
+                            <td id="rencana352">rencana</td>
+                            <td id="target352">target</td>
+                            <td id="bukti352">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Seluruh aset cabang terkontrol sejak saat pengajuan, pengolahan dan persetujuan, serta telah dikaji dengan baik dan benar untuk meyakini bahwa sumber pengembalian pembiayaan tetap berjalan dan jaminan yang diberikan tidak mengalami penurunan nilai</td>
+                            <td id="status353">status</td>
+                            <td id="rencana353">rencana</td>
+                            <td id="target353">target</td>
+                            <td id="bukti353">bukti</td>
+                        </tr>
+                        <!--COSO41-->
+                        <tr class="table-primary">
+                            <td colspan="9">COSO 4 - Kegiatan Pemantauan</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">Keluhan nasabah menjadi salah satu fungsi kontrol untuk menjaga kualitas layanan</td>
+                            <td>Keluhan nasabah secara selektif disampaikan dalam forum internal cabang dan dipantau proses penyelesaiannya dengan segera atau sesuai SLA</td>
+                            <td id="status411">status</td>
+                            <td id="rencana411">rencana</td>
+                            <td id="target411">target</td>
+                            <td id="bukti411">bukti</td>
+                            <td id="skor41" rowspan="3">skor</td>
+                            <td id="risiko41" rowspan="3">M</td>
+                            <td id="skorAkhir41" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Keluhan nasabah ditangani oleh pihak-pihak yang kompeten sesuai dengan fungsi untuk menjaga kualitas tanggapan dan SLA</td>
+                            <td id="status412">status</td>
+                            <td id="rencana412">rencana</td>
+                            <td id="target412">target</td>
+                            <td id="bukti412">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Lakukan pengawasan sewaktu-waktu untuk meyakini bahwa seluruh fasilitas di kantor cabang dan kualitas pelayanan nasabah dalam keadaan baik dan terpelihara</td>
+                            <td id="status413">status</td>
+                            <td id="rencana413">rencana</td>
+                            <td id="target413">target</td>
+                            <td id="bukti413">bukti</td>
+                        </tr>
+                        <!--COSO42-->
+                        <tr>
+                            <td rowspan="3">Standar layanan dan penggunaan peralatan peraga, brosur, informasi tarif, serta produk terkini</td>
+                            <td>Seluruh pekerja memiliki visi dan misi yang sama serta menjalankan TRIP</td>
+                            <td id="status421">status</td>
+                            <td id="rencana421">rencana</td>
+                            <td id="target421">target</td>
+                            <td id="bukti421">bukti</td>
+                            <td id="skor42" rowspan="3">skor</td>
+                            <td id="risiko42" rowspan="3">L</td>
+                            <td id="skorAkhir42" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Pemberian informasi produk dilakukan secara transparan dan menyesuaikan profil nasabah sesuai program APU/PPT</td>
+                            <td id="status422">status</td>
+                            <td id="rencana422">rencana</td>
+                            <td id="target422">target</td>
+                            <td id="bukti422">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Seluruh kantor cabang telah dilengkapi dengan alat peraga, brosur, info tarif, dan info produk terkini</td>
+                            <td id="status423">status</td>
+                            <td id="rencana423">rencana</td>
+                            <td id="target423">target</td>
+                            <td id="bukti423">bukti</td>
+                        </tr>
+                        <!--COSO51-->
+                        <tr class="table-primary">
+                            <td colspan="9">COSO 5 - Sistem Akuntansi, Informasi dan Komunikasi</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">Layanan transaksi dijalankan secara profesional dimana kelengkapan dokumen administratif dan catatan transaksi dikelola dengan cermat</td>
+                            <td>Transaksi dari nasabah yang dikuasakan telah didukung oleh surat perjanjian, LOL, atau perintah khusus dari pihak bank</td>
+                            <td id="status511">status</td>
+                            <td id="rencana511">rencana</td>
+                            <td id="target511">target</td>
+                            <td id="bukti511">bukti</td>
+                            <td id="skor51" rowspan="3">skor</td>
+                            <td id="risiko51" rowspan="3">H</td>
+                            <td id="skorAkhir51" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Instruksi dari nasabah berjalan sesuai dengan transaksi yang diajukan dan tidak ada penundaan, keluhan, atau sanksi</td>
+                            <td id="status512">status</td>
+                            <td id="rencana512">rencana</td>
+                            <td id="target512">target</td>
+                            <td id="bukti512">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Setiap instruksi dilengkapi dengan dokumen asli dan diperiksa kebenarannya mengggunakan arsip atau sistem bank</td>
+                            <td id="status513">status</td>
+                            <td id="rencana513">rencana</td>
+                            <td id="target513">target</td>
+                            <td id="bukti513">bukti</td>
+                        </tr>
+                        <!--COSO52-->
+                        <tr>
+                            <td rowspan="3">Seluruh pekerja memahami security awareness, pengamanan informasi, dan jenis korespondensi sebagai suatu kegiatan yang saling berkaitan dan harus dipatuhi</td>
+                            <td>Dipastikan bahwa surat atau informasi yang disampaikan kepada pihak lain telah memenuhi unsur pengamanan informasi, pengamanan data pribadi, dan tata cara profesional</td>
+                            <td id="status521">status</td>
+                            <td id="rencana521">rencana</td>
+                            <td id="target521">target</td>
+                            <td id="bukti521">bukti</td>
+                            <td id="skor52" rowspan="3">skor</td>
+                            <td id="risiko52" rowspan="3">M</td>
+                            <td id="skorAkhir52" rowspan="3" class="table-warning">skor akhir</td>
+                        </tr>
+                        <tr>
+                            <td>Seluruh peralatan yang dipergunakan mengikuti standar TI, pemeliharaan antivirus secara berkala, dan peralatan cadangan terpelihara untuk kenyamanan nasabah</td>
+                            <td id="status522">status</td>
+                            <td id="rencana522">rencana</td>
+                            <td id="target522">target</td>
+                            <td id="bukti522">bukti</td>
+                        </tr>
+                        <tr>
+                            <td>Seluruh petugas telah mengikuti pelatihan internal dan refreshment sehingga dapat mengelola akses pribadi secara benar (pengelolaan password, pemegang kunci, dan restricted area)</td>
+                            <td id="status523">status</td>
+                            <td id="rencana523">rencana</td>
+                            <td id="target523">target</td>
+                            <td id="bukti523">bukti</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>  
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="passwordSalahToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                <strong class="me-auto">Notifikasi Sistem</strong>
+                <small id="timestamp"></small>
+                <script>
+                    var timestamp = document.getElementById("timestamp");
+
+                    const now = new Date();
+                    var hours = now.getHours().toString();
+                    var minutes = now.getMinutes().toString();
+
+                    if (hours.length == 1) {
+                        hours = "0" + hours;
+                    }
+
+                    if (minutes.length == 1) {
+                        minutes = "0" + minutes;
+                    }
+
+                    timestamp.innerText = hours + " : " + minutes;
+                </script>
+            </div>
+            <div class="toast-body">
+                Password yang anda masukkan salah!
+            </div>
+        </div>
+    </div>
+</body>
+</html>
