@@ -147,7 +147,7 @@ function show() {
                         eProfilRisiko.innerText = "BURUK";
                     }
 
-                    const scoreBar = totalSkorAkhir / 1500;
+                    const scoreBar = totalSkorAkhir / 1500 * 100;
                     eProfilRisiko.innerText += " (" + scoreBar.toFixed(2) + "%)";
 
                     document.getElementById("scoreBar").style.width = scoreBar.toFixed(2) + "%";
