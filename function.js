@@ -4,10 +4,10 @@ function onboard() {
         showProgress: true,
         allowClose: false,
         steps: [
-            { element: '#activityTitle', popover: { title: 'Deskripsi Aktivitas', description: 'Bacalah aktivitas berikut dan lakukan evaluasi mandiri apakah Kantor Cabang anda telah menjalankan aktivitas tersebut sesuai prosedur yang berlaku.' } },
-            { element: '#activityToggle', popover: { title: 'Toggle Aktivitas', description: 'Klik toggle untuk menyesuaikan apakah Kantor Cabang anda telah melakukan aktivitas terkait dan isilah kolom-kolom isian di bawahnya.' } },
-            { element: '#activitySimpan', popover: { title: 'Tombol Simpan', description: 'Klik tombol Simpan untuk menyimpan hasil isian anda pada aktivitas ini.' } },
-            { element: '#activityNavigation', popover: { title: 'Menu Navigasi', description: 'Gunakan menu navigasi untuk berpindah antar aktivitas dan memantau progres pengisian AKUR anda.' } },
+            { element: '#activityTitle', popover: { title: 'Deskripsi Aktivitas', description: 'Bacalah aktivitas berikut dan lakukan evaluasi mandiri apakah Kantor Cabang anda telah menjalankan aktivitas tersebut sesuai prosedur yang berlaku.', side: 'left', align: 'start' } },
+            { element: '#activityToggle', popover: { title: 'Toggle Aktivitas', description: 'Klik toggle untuk menyesuaikan apakah Kantor Cabang anda telah melakukan aktivitas terkait dan isilah kolom-kolom isian di bawahnya.', side: 'left', align: 'start' } },
+            { element: '#activitySimpan', popover: { title: 'Tombol Simpan', description: 'Klik tombol Simpan untuk menyimpan hasil isian anda pada aktivitas ini.', side: 'top', align: 'center' } },
+            { element: '#activityNavigation', popover: { title: 'Menu Navigasi', description: 'Gunakan menu navigasi untuk berpindah antar aktivitas dan memantau progres pengisian AKUR anda.', side: 'top', align: 'start' } },
         ]
     }); 
     driverObj.drive();
