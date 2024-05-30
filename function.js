@@ -9,7 +9,7 @@ function onboard() {
             { element: '#activitySimpan', popover: { title: 'Tombol Simpan', description: 'Klik tombol Simpan untuk menyimpan hasil isian anda pada aktivitas ini.', side: 'top', align: 'center' } },
             { element: '#activityNavigation', popover: { title: 'Menu Navigasi', description: 'Gunakan menu navigasi untuk berpindah antar aktivitas dan memantau progres pengisian AKUR anda.', side: 'top', align: 'start' } },
         ]
-    }); 
+    });
     driverObj.drive();
 }
 
