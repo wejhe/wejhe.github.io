@@ -2,6 +2,7 @@ function onboard() {
     const driver = window.driver.js.driver;
     const driverObj = driver({
         showProgress: true,
+        allowClose: false,
         steps: [
             { element: '#activityTitle', popover: { title: 'Deskripsi Aktivitas', description: 'Bacalah aktivitas berikut dan lakukan evaluasi mandiri apakah Kantor Cabang anda telah menjalankan aktivitas tersebut sesuai prosedur yang berlaku.' } },
             { element: '#activityToggle', popover: { title: 'Toggle Aktivitas', description: 'Klik toggle untuk menyesuaikan apakah Kantor Cabang anda telah melakukan aktivitas terkait dan isilah kolom-kolom isian di bawahnya.' } },
