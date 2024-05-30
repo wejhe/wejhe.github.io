@@ -818,8 +818,6 @@ function coso1home(){
 
     (async () => {
         try {
-            const namaCabang = await bcas.getItem("namaCabang");
-            const kodeCabang = await bcas.getItem("kodeCabang");
             const progressOverall = await bcas.getItem("progressOverall");
             const progressCOSO1 = await bcas.getItem("progressCOSO1");
             const progressCOSO2 = await bcas.getItem("progressCOSO2");
@@ -833,9 +831,6 @@ function coso1home(){
             const progressCOSO15 = await bcas.getItem("progressCOSO15");
             const progressCOSO16 = await bcas.getItem("progressCOSO16");
             const progressCOSO17 = await bcas.getItem("progressCOSO17");
-
-            var home = document.getElementById("home");
-            home.innerHTML += "Home - " + namaCabang + " (" + kodeCabang + ")";
 
             if (
                 progressOverall !== null
@@ -852,7 +847,8 @@ function coso1home(){
                 && progressCOSO16 !== null
                 && progressCOSO17 !== null
             ) {
-                home.innerHTML += " - OVR Progress : " + progressOverall + "%";
+                document.getElementById("progressOverall").style.width = progressOverall + "%";
+                document.getElementById("progressInside").innerText = progressOverall + "%";
                 document.getElementById("progressCOSO1").innerText = progressCOSO1 + "%";
                 document.getElementById("progressCOSO2").innerText = progressCOSO2 + "%";
                 document.getElementById("progressCOSO3").innerText = progressCOSO3 + "%";
@@ -878,8 +874,6 @@ function coso2home(){
 
     (async () => {
         try {
-            const namaCabang = await bcas.getItem("namaCabang");
-            const kodeCabang = await bcas.getItem("kodeCabang");
             const progressOverall = await bcas.getItem("progressOverall");
             const progressCOSO1 = await bcas.getItem("progressCOSO1");
             const progressCOSO2 = await bcas.getItem("progressCOSO2");
@@ -887,9 +881,6 @@ function coso2home(){
             const progressCOSO4 = await bcas.getItem("progressCOSO4");
             const progressCOSO5 = await bcas.getItem("progressCOSO5");
             const progressCOSO21 = await bcas.getItem("progressCOSO21");
-
-            var home = document.getElementById("home");
-            home.innerHTML += "Home - " + namaCabang + " (" + kodeCabang + ")";
 
             if (
                 progressOverall !== null
@@ -900,7 +891,8 @@ function coso2home(){
                 && progressCOSO5 !== null
                 && progressCOSO21 !== null
             ) {
-                home.innerHTML += " - OVR Progress : " + progressOverall + "%";
+                document.getElementById("progressOverall").style.width = progressOverall + "%";
+                document.getElementById("progressInside").innerText = progressOverall + "%";
                 document.getElementById("progressCOSO1").innerText = progressCOSO1 + "%";
                 document.getElementById("progressCOSO2").innerText = progressCOSO2 + "%";
                 document.getElementById("progressCOSO3").innerText = progressCOSO3 + "%";
@@ -920,8 +912,6 @@ function coso3home(){
 
     (async () => {
         try {
-            const namaCabang = await bcas.getItem("namaCabang");
-            const kodeCabang = await bcas.getItem("kodeCabang");
             const progressOverall = await bcas.getItem("progressOverall");
             const progressCOSO1 = await bcas.getItem("progressCOSO1");
             const progressCOSO2 = await bcas.getItem("progressCOSO2");
@@ -933,9 +923,6 @@ function coso3home(){
             const progressCOSO33 = await bcas.getItem("progressCOSO33");
             const progressCOSO34 = await bcas.getItem("progressCOSO34");
             const progressCOSO35 = await bcas.getItem("progressCOSO35");
-
-            var home = document.getElementById("home");
-            home.innerHTML += "Home - " + namaCabang + " (" + kodeCabang + ")";
 
             if (
                 progressOverall !== null
@@ -950,7 +937,8 @@ function coso3home(){
                 && progressCOSO34 !== null
                 && progressCOSO35 !== null
             ) {
-                home.innerHTML += " - OVR Progress : " + progressOverall + "%";
+                document.getElementById("progressOverall").style.width = progressOverall + "%";
+                document.getElementById("progressInside").innerText = progressOverall + "%";
                 document.getElementById("progressCOSO1").innerText = progressCOSO1 + "%";
                 document.getElementById("progressCOSO2").innerText = progressCOSO2 + "%";
                 document.getElementById("progressCOSO3").innerText = progressCOSO3 + "%";
@@ -974,8 +962,6 @@ function coso4home(){
 
     (async () => {
         try {
-            const namaCabang = await bcas.getItem("namaCabang");
-            const kodeCabang = await bcas.getItem("kodeCabang");
             const progressOverall = await bcas.getItem("progressOverall");
             const progressCOSO1 = await bcas.getItem("progressCOSO1");
             const progressCOSO2 = await bcas.getItem("progressCOSO2");
@@ -984,9 +970,6 @@ function coso4home(){
             const progressCOSO5 = await bcas.getItem("progressCOSO5");
             const progressCOSO41 = await bcas.getItem("progressCOSO41");
             const progressCOSO42 = await bcas.getItem("progressCOSO42");
-
-            var home = document.getElementById("home");
-            home.innerHTML += "Home - " + namaCabang + " (" + kodeCabang + ")";
 
             if (
                 progressOverall !== null
@@ -998,8 +981,8 @@ function coso4home(){
                 && progressCOSO41 !== null
                 && progressCOSO42 !== null
             ) {
-                home.innerHTML += " - OVR Progress : " + progressOverall + "%";
-                document.getElementById("progressCOSO1").innerText = progressCOSO1 + "%";
+                document.getElementById("progressOverall").style.width = progressOverall + "%";
+                document.getElementById("progressInside").innerText = progressOverall + "%";                document.getElementById("progressCOSO1").innerText = progressCOSO1 + "%";
                 document.getElementById("progressCOSO2").innerText = progressCOSO2 + "%";
                 document.getElementById("progressCOSO3").innerText = progressCOSO3 + "%";
                 document.getElementById("progressCOSO4").innerText = progressCOSO4 + "%";
@@ -1019,8 +1002,6 @@ function coso5home(){
 
     (async () => {
         try {
-            const namaCabang = await bcas.getItem("namaCabang");
-            const kodeCabang = await bcas.getItem("kodeCabang");
             const progressOverall = await bcas.getItem("progressOverall");
             const progressCOSO1 = await bcas.getItem("progressCOSO1");
             const progressCOSO2 = await bcas.getItem("progressCOSO2");
@@ -1029,9 +1010,6 @@ function coso5home(){
             const progressCOSO5 = await bcas.getItem("progressCOSO5");
             const progressCOSO51 = await bcas.getItem("progressCOSO51");
             const progressCOSO52 = await bcas.getItem("progressCOSO52");
-
-            var home = document.getElementById("home");
-            home.innerHTML += "Home - " + namaCabang + " (" + kodeCabang + ")";
 
             if (
                 progressOverall !== null
@@ -1043,7 +1021,8 @@ function coso5home(){
                 && progressCOSO51 !== null
                 && progressCOSO52 !== null
             ) {
-                home.innerHTML += " - OVR Progress : " + progressOverall + "%";
+                document.getElementById("progressOverall").style.width = progressOverall + "%";
+                document.getElementById("progressInside").innerText = progressOverall + "%";
                 document.getElementById("progressCOSO1").innerText = progressCOSO1 + "%";
                 document.getElementById("progressCOSO2").innerText = progressCOSO2 + "%";
                 document.getElementById("progressCOSO3").innerText = progressCOSO3 + "%";
@@ -1062,8 +1041,11 @@ function showKuesioner() {
     notLoginCheck();
     updateProgress();
 
-    var home = document.getElementById("home");
-    home.innerHTML = '<i class="bi bi-house-door-fill me-2"></i>Memuat progress anda<div id="spinner" class="spinner-border spinner-border-sm text-black ms-2" role="status"><span class="visually-hidden"></span></div>';
+    var navCenter = document.getElementById("navCenter");
+    var progressContainer = document.getElementById("progressContainer");
+    progressContainer.setAttribute("hidden", true);
+    navCenter.classList.add("mt-1");
+    navCenter.innerHTML += '<div id="loading">Memuat progress anda<div id="spinner" class="spinner-border spinner-border-sm text-black ms-2" role="status"><span class="visually-hidden"></span></div></div>';
 
     (async () => {
         try {
@@ -1088,11 +1070,16 @@ function showKuesioner() {
             const progressCOSO51 = await bcas.getItem("progressCOSO51");
             const progressCOSO52 = await bcas.getItem("progressCOSO52");
 
-            home.innerHTML = '<i class="bi bi-house-door-fill me-2"></i>Home - ' + namaCabang + ' (' + kodeCabang + ')';
+            document.getElementById("navCenter").classList.remove("mt-1");
+            document.getElementById("loading").setAttribute("hidden", true);
+            document.getElementById("progressContainer").removeAttribute("hidden");
 
-            if (progressOverall !== null) {
-                home.innerHTML += " - OVR Progress : " + progressOverall + "%";
-            }
+            sleep(100).then(() => {
+                if (progressOverall !== null) {
+                    document.getElementById("progressOverall").style.width = progressOverall + "%";
+                    document.getElementById("progressInside").innerText = progressOverall + "%";
+                }
+            })
 
             if (
                 progressCOSO11 !== null
