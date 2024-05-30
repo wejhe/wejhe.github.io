@@ -1736,6 +1736,198 @@ function resetData3(coso) {
     })
 }
 
+function formValidation1() {
+    var toggle1 = document.getElementById("toggle1").checked;
+    var buktiPelaksanaan1Value = document.getElementById("buktiPelaksanaan1Value");
+    var rencanaTindakLanjut1Value = document.getElementById("rencanaTindakLanjut1Value");
+    var targetPerbaikan1Value = document.getElementById("targetPerbaikan1Value");
+    var simpan1 = document.getElementById("simpan1");
+
+    if (toggle1 === true) {
+        if(
+            buktiPelaksanaan1Value.value.length > 0
+        ) {
+            simpan1.removeAttribute("disabled");
+        } else {
+            simpan1.setAttribute("disabled", true);
+        }
+    } else {
+        if(
+            rencanaTindakLanjut1Value.value.length > 0
+            && targetPerbaikan1Value.value.length > 0
+        ) {
+            simpan1.removeAttribute("disabled");
+        } else {
+            simpan1.setAttribute("disabled", true);
+        }
+    }
+}
+
+function toggleKuesioner1() {
+    var toggle1 = document.getElementById("toggle1").checked;
+    var buktiPelaksanaan1 = document.getElementById("buktiPelaksanaan1");
+    var rencanaTindakLanjut1 = document.getElementById("rencanaTindakLanjut1");
+    var targetPerbaikan1 = document.getElementById("targetPerbaikan1");
+    var sudah1 = document.getElementById("sudah1");
+    var belum1 = document.getElementById("belum1");
+    var ikonSudah1 = document.getElementById("ikonSudah1");
+    var ikonBelum1 = document.getElementById("ikonBelum1");
+
+    if (toggle1 === true) {
+        belum1.classList.add("opacity-50");
+        sudah1.classList.remove("opacity-50");
+        belum1.classList.remove("fw-bold");
+        sudah1.classList.add("fw-bold");
+        belum1.classList.remove("text-danger");
+        sudah1.classList.add("text-success");
+        ikonSudah1.removeAttribute("hidden");
+        ikonBelum1.setAttribute("hidden", true);
+        buktiPelaksanaan1.removeAttribute("hidden");
+        rencanaTindakLanjut1.setAttribute("hidden", true);
+        targetPerbaikan1.setAttribute("hidden", true);
+    } else {
+        belum1.classList.remove("opacity-50");
+        sudah1.classList.add("opacity-50");
+        sudah1.classList.remove("fw-bold");
+        belum1.classList.add("fw-bold");
+        sudah1.classList.remove("text-success");
+        belum1.classList.add("text-danger");
+        ikonBelum1.removeAttribute("hidden");
+        ikonSudah1.setAttribute("hidden", true);
+        buktiPelaksanaan1.setAttribute("hidden", true);
+        rencanaTindakLanjut1.removeAttribute("hidden");
+        targetPerbaikan1.removeAttribute("hidden");
+    }
+}
+
+function formValidation2() {
+    var toggle2 = document.getElementById("toggle2").checked;
+    var buktiPelaksanaan2Value = document.getElementById("buktiPelaksanaan2Value");
+    var rencanaTindakLanjut2Value = document.getElementById("rencanaTindakLanjut2Value");
+    var targetPerbaikan2Value = document.getElementById("targetPerbaikan2Value");
+    var simpan2 = document.getElementById("simpan2");
+
+    if (toggle2 === true) {
+        if(
+            buktiPelaksanaan2Value.value.length > 0
+        ) {
+            simpan2.removeAttribute("disabled");
+        } else {
+            simpan2.setAttribute("disabled", true);
+        }
+    } else {
+        if(
+            rencanaTindakLanjut2Value.value.length > 0
+            && targetPerbaikan2Value.value.length > 0
+        ) {
+            simpan2.removeAttribute("disabled");
+        } else {
+            simpan2.setAttribute("disabled", true);
+        }
+    }
+}
+
+function toggleKuesioner2() {
+    var toggle2 = document.getElementById("toggle2").checked;
+    var buktiPelaksanaan2 = document.getElementById("buktiPelaksanaan2");
+    var rencanaTindakLanjut2 = document.getElementById("rencanaTindakLanjut2");
+    var targetPerbaikan2 = document.getElementById("targetPerbaikan2");
+    var sudah2 = document.getElementById("sudah2");
+    var belum2 = document.getElementById("belum2");
+    var ikonSudah2 = document.getElementById("ikonSudah2");
+    var ikonBelum2 = document.getElementById("ikonBelum2");
+
+    if (toggle2 === true) {
+        belum2.classList.add("opacity-50");
+        sudah2.classList.remove("opacity-50");
+        belum2.classList.remove("fw-bold");
+        sudah2.classList.add("fw-bold");
+        belum2.classList.remove("text-danger");
+        sudah2.classList.add("text-success");
+        ikonSudah2.removeAttribute("hidden");
+        ikonBelum2.setAttribute("hidden", true);
+        buktiPelaksanaan2.removeAttribute("hidden");
+        rencanaTindakLanjut2.setAttribute("hidden", true);
+        targetPerbaikan2.setAttribute("hidden", true);
+    } else {
+        belum2.classList.remove("opacity-50");
+        sudah2.classList.add("opacity-50");
+        sudah2.classList.remove("fw-bold");
+        belum2.classList.add("fw-bold");
+        sudah2.classList.remove("text-success");
+        belum2.classList.add("text-danger");
+        ikonBelum2.removeAttribute("hidden");
+        ikonSudah2.setAttribute("hidden", true);
+        buktiPelaksanaan2.setAttribute("hidden", true);
+        rencanaTindakLanjut2.removeAttribute("hidden");
+        targetPerbaikan2.removeAttribute("hidden");
+    }
+}
+
+function formValidation3() {
+    var toggle3 = document.getElementById("toggle3").checked;
+    var buktiPelaksanaan3Value = document.getElementById("buktiPelaksanaan3Value");
+    var rencanaTindakLanjut3Value = document.getElementById("rencanaTindakLanjut3Value");
+    var targetPerbaikan3Value = document.getElementById("targetPerbaikan3Value");
+    var simpan3 = document.getElementById("simpan3");
+
+    if (toggle3 === true) {
+        if(
+            buktiPelaksanaan3Value.value.length > 0
+        ) {
+            simpan3.removeAttribute("disabled");
+        } else {
+            simpan3.setAttribute("disabled", true);
+        }
+    } else {
+        if(
+            rencanaTindakLanjut3Value.value.length > 0
+            && targetPerbaikan3Value.value.length > 0
+        ) {
+            simpan3.removeAttribute("disabled");
+        } else {
+            simpan3.setAttribute("disabled", true);
+        }
+    }
+}
+
+function toggleKuesioner3() {
+    var toggle3 = document.getElementById("toggle3").checked;
+    var buktiPelaksanaan3 = document.getElementById("buktiPelaksanaan3");
+    var rencanaTindakLanjut3 = document.getElementById("rencanaTindakLanjut3");
+    var targetPerbaikan3 = document.getElementById("targetPerbaikan3");
+    var sudah3 = document.getElementById("sudah3");
+    var belum3 = document.getElementById("belum3");
+    var ikonSudah3 = document.getElementById("ikonSudah3");
+    var ikonBelum3 = document.getElementById("ikonBelum3");
+
+    if (toggle3 === true) {
+        belum3.classList.add("opacity-50");
+        sudah3.classList.remove("opacity-50");
+        belum3.classList.remove("fw-bold");
+        sudah3.classList.add("fw-bold");
+        belum3.classList.remove("text-danger");
+        sudah3.classList.add("text-success");
+        ikonSudah3.removeAttribute("hidden");
+        ikonBelum3.setAttribute("hidden", true);
+        buktiPelaksanaan3.removeAttribute("hidden");
+        rencanaTindakLanjut3.setAttribute("hidden", true);
+        targetPerbaikan3.setAttribute("hidden", true);
+    } else {
+        belum3.classList.remove("opacity-50");
+        sudah3.classList.add("opacity-50");
+        sudah3.classList.remove("fw-bold");
+        belum3.classList.add("fw-bold");
+        sudah3.classList.remove("text-success");
+        belum3.classList.add("text-danger");
+        ikonBelum3.removeAttribute("hidden");
+        ikonSudah3.setAttribute("hidden", true);
+        buktiPelaksanaan3.setAttribute("hidden", true);
+        rencanaTindakLanjut3.removeAttribute("hidden");
+        targetPerbaikan3.removeAttribute("hidden");
+    }
+}
+
 function getBase64(file, callback) {
     var reader = new FileReader();
     reader.readAsDataURL(file);

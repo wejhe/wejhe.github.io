@@ -118,9 +118,20 @@
                                 </div>
                                 <hr>
                                 <div class="mb-3">
-                                    <div class="form-check form-switch d-inline-block align-middle">
-                                        <input onchange="toggleKuesioner1(), formValidation1()" class="form-check-input mt-2" type="checkbox" role="switch" id="toggle1">
-                                        <div class="form-text text-center">Sudah dilakukan? (N/Y)</div>
+                                    <div class="form-check form-switch py-1 border rounded-pill" style="margin: 0; padding: 0;">
+                                        <div class="row">
+                                            <div id="belum1" class="form-text col-md-5 text-end" style="margin-top: 0.05em;">
+                                                <i id="ikonBelum1" class="bi bi-x-circle-fill me-1" hidden></i>
+                                                BELUM
+                                            </div>
+                                            <div class="col-md-2 text-center">
+                                                <input onchange="toggleKuesioner1(), formValidation1()" class="form-check-input" style="margin-left: 0; float: none;" type="checkbox" role="switch" id="toggle1">
+                                            </div>
+                                            <div id="sudah1" class="form-text col-md-5 text-start" style="margin-top: 0.05em;">
+                                                SUDAH
+                                                <i id="ikonSudah1" class="bi bi-check-circle-fill ms-1" hidden></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="buktiPelaksanaan1" class="mb-3">
@@ -144,50 +155,6 @@
                                 <script>
                                     toggleKuesioner1();
                                     loadData1('35');
-
-                                    function formValidation1() {
-                                        var toggle1 = document.getElementById("toggle1").checked;
-                                        var buktiPelaksanaan1Value = document.getElementById("buktiPelaksanaan1Value");
-                                        var rencanaTindakLanjut1Value = document.getElementById("rencanaTindakLanjut1Value");
-                                        var targetPerbaikan1Value = document.getElementById("targetPerbaikan1Value");
-                                        var simpan1 = document.getElementById("simpan1");
-
-                                        if (toggle1 === true) {
-                                            if(
-                                                buktiPelaksanaan1Value.value.length > 0
-                                            ) {
-                                                simpan1.removeAttribute("disabled");
-                                            } else {
-                                                simpan1.setAttribute("disabled", true);
-                                            }
-                                        } else {
-                                            if(
-                                                rencanaTindakLanjut1Value.value.length > 0
-                                                && targetPerbaikan1Value.value.length > 0
-                                            ) {
-                                                simpan1.removeAttribute("disabled");
-                                            } else {
-                                                simpan1.setAttribute("disabled", true);
-                                            }
-                                        }
-                                    }
-
-                                    function toggleKuesioner1() {
-                                        var toggle1 = document.getElementById("toggle1").checked;
-                                        var buktiPelaksanaan1 = document.getElementById("buktiPelaksanaan1");
-                                        var rencanaTindakLanjut1 = document.getElementById("rencanaTindakLanjut1");
-                                        var targetPerbaikan1 = document.getElementById("targetPerbaikan1");
-
-                                        if (toggle1 === true) {
-                                            buktiPelaksanaan1.removeAttribute("hidden");
-                                            rencanaTindakLanjut1.setAttribute("hidden", true);
-                                            targetPerbaikan1.setAttribute("hidden", true);
-                                        } else {
-                                            buktiPelaksanaan1.setAttribute("hidden", true);
-                                            rencanaTindakLanjut1.removeAttribute("hidden");
-                                            targetPerbaikan1.removeAttribute("hidden");
-                                        }
-                                    }
                                 </script>
                             </form>
                         </div>
@@ -202,9 +169,20 @@
                                 </div>
                                 <hr>
                                 <div class="mb-3">
-                                    <div class="form-check form-switch d-inline-block align-middle">
-                                        <input onchange="toggleKuesioner2(), formValidation2()" class="form-check-input mt-2" type="checkbox" role="switch" id="toggle2">
-                                        <div class="form-text text-center">Sudah dilakukan? (N/Y)</div>
+                                    <div class="form-check form-switch py-1 border rounded-pill" style="margin: 0; padding: 0;">
+                                        <div class="row">
+                                            <div id="belum2" class="form-text col-md-5 text-end" style="margin-top: 0.05em;">
+                                                <i id="ikonBelum2" class="bi bi-x-circle-fill me-1" hidden></i>
+                                                BELUM
+                                            </div>
+                                            <div class="col-md-2 text-center">
+                                                <input onchange="toggleKuesioner2(), formValidation2()" class="form-check-input" style="margin-left: 0; float: none;" type="checkbox" role="switch" id="toggle2">
+                                            </div>
+                                            <div id="sudah2" class="form-text col-md-5 text-start" style="margin-top: 0.05em;">
+                                                SUDAH
+                                                <i id="ikonSudah2" class="bi bi-check-circle-fill ms-1" hidden></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="buktiPelaksanaan2" class="mb-3">
@@ -228,50 +206,6 @@
                                 <script>
                                     toggleKuesioner2();
                                     loadData2('35');
-
-                                    function formValidation2() {
-                                        var toggle2 = document.getElementById("toggle2").checked;
-                                        var buktiPelaksanaan2Value = document.getElementById("buktiPelaksanaan2Value");
-                                        var rencanaTindakLanjut2Value = document.getElementById("rencanaTindakLanjut2Value");
-                                        var targetPerbaikan2Value = document.getElementById("targetPerbaikan2Value");
-                                        var simpan2 = document.getElementById("simpan2");
-
-                                        if (toggle2 === true) {
-                                            if(
-                                                buktiPelaksanaan2Value.value.length > 0
-                                            ) {
-                                                simpan2.removeAttribute("disabled");
-                                            } else {
-                                                simpan2.setAttribute("disabled", true);
-                                            }
-                                        } else {
-                                            if(
-                                                rencanaTindakLanjut2Value.value.length > 0
-                                                && targetPerbaikan2Value.value.length > 0
-                                            ) {
-                                                simpan2.removeAttribute("disabled");
-                                            } else {
-                                                simpan2.setAttribute("disabled", true);
-                                            }
-                                        }
-                                    }
-
-                                    function toggleKuesioner2() {
-                                        var toggle2 = document.getElementById("toggle2").checked;
-                                        var buktiPelaksanaan2 = document.getElementById("buktiPelaksanaan2");
-                                        var rencanaTindakLanjut2 = document.getElementById("rencanaTindakLanjut2");
-                                        var targetPerbaikan2 = document.getElementById("targetPerbaikan2");
-
-                                        if (toggle2 === true) {
-                                            buktiPelaksanaan2.removeAttribute("hidden");
-                                            rencanaTindakLanjut2.setAttribute("hidden", true);
-                                            targetPerbaikan2.setAttribute("hidden", true);
-                                        } else {
-                                            buktiPelaksanaan2.setAttribute("hidden", true);
-                                            rencanaTindakLanjut2.removeAttribute("hidden");
-                                            targetPerbaikan2.removeAttribute("hidden");
-                                        }
-                                    }
                                 </script>
                             </form>
                         </div>
@@ -286,9 +220,20 @@
                                 </div>
                                 <hr>
                                 <div class="mb-3">
-                                    <div class="form-check form-switch d-inline-block align-middle">
-                                        <input onchange="toggleKuesioner3(), formValidation3()" class="form-check-input mt-2" type="checkbox" role="switch" id="toggle3">
-                                        <div class="form-text text-center">Sudah dilakukan? (N/Y)</div>
+                                    <div class="form-check form-switch py-1 border rounded-pill" style="margin: 0; padding: 0;">
+                                        <div class="row">
+                                            <div id="belum3" class="form-text col-md-5 text-end" style="margin-top: 0.05em;">
+                                                <i id="ikonBelum3" class="bi bi-x-circle-fill me-1" hidden></i>
+                                                BELUM
+                                            </div>
+                                            <div class="col-md-2 text-center">
+                                                <input onchange="toggleKuesioner3(), formValidation3()" class="form-check-input" style="margin-left: 0; float: none;" type="checkbox" role="switch" id="toggle3">
+                                            </div>
+                                            <div id="sudah3" class="form-text col-md-5 text-start" style="margin-top: 0.05em;">
+                                                SUDAH
+                                                <i id="ikonSudah3" class="bi bi-check-circle-fill ms-1" hidden></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="buktiPelaksanaan3" class="mb-3">
@@ -312,50 +257,6 @@
                                 <script>
                                     toggleKuesioner3();
                                     loadData3('35');
-
-                                    function formValidation3() {
-                                        var toggle3 = document.getElementById("toggle3").checked;
-                                        var buktiPelaksanaan3Value = document.getElementById("buktiPelaksanaan3Value");
-                                        var rencanaTindakLanjut3Value = document.getElementById("rencanaTindakLanjut3Value");
-                                        var targetPerbaikan3Value = document.getElementById("targetPerbaikan3Value");
-                                        var simpan3 = document.getElementById("simpan3");
-
-                                        if (toggle3 === true) {
-                                            if(
-                                                buktiPelaksanaan3Value.value.length > 0
-                                            ) {
-                                                simpan3.removeAttribute("disabled");
-                                            } else {
-                                                simpan3.setAttribute("disabled", true);
-                                            }
-                                        } else {
-                                            if(
-                                                rencanaTindakLanjut3Value.value.length > 0
-                                                && targetPerbaikan3Value.value.length > 0
-                                            ) {
-                                                simpan3.removeAttribute("disabled");
-                                            } else {
-                                                simpan3.setAttribute("disabled", true);
-                                            }
-                                        }
-                                    }
-
-                                    function toggleKuesioner3() {
-                                        var toggle3 = document.getElementById("toggle3").checked;
-                                        var buktiPelaksanaan3 = document.getElementById("buktiPelaksanaan3");
-                                        var rencanaTindakLanjut3 = document.getElementById("rencanaTindakLanjut3");
-                                        var targetPerbaikan3 = document.getElementById("targetPerbaikan3");
-
-                                        if (toggle3 === true) {
-                                            buktiPelaksanaan3.removeAttribute("hidden");
-                                            rencanaTindakLanjut3.setAttribute("hidden", true);
-                                            targetPerbaikan3.setAttribute("hidden", true);
-                                        } else {
-                                            buktiPelaksanaan3.setAttribute("hidden", true);
-                                            rencanaTindakLanjut3.removeAttribute("hidden");
-                                            targetPerbaikan3.removeAttribute("hidden");
-                                        }
-                                    }
                                 </script>
                             </form>
                         </div>
