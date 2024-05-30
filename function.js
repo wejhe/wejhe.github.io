@@ -1,3 +1,17 @@
+function onboard() {
+    const driver = window.driver.js.driver;
+    const driverObj = driver({
+        showProgress: true,
+        steps: [
+            { element: '#activityTitle', popover: { title: 'Deskripsi Aktivitas', description: 'Bacalah aktivitas berikut dan lakukan evaluasi mandiri apakah Kantor Cabang anda telah menjalankan aktivitas tersebut sesuai prosedur yang berlaku.' } },
+            { element: '#activityToggle', popover: { title: 'Toggle Aktivitas', description: 'Klik toggle untuk menyesuaikan apakah Kantor Cabang anda telah melakukan aktivitas terkait dan isilah kolom-kolom isian di bawahnya.' } },
+            { element: '#activitySimpan', popover: { title: 'Tombol Simpan', description: 'Klik tombol Simpan untuk menyimpan hasil isian anda pada aktivitas ini.' } },
+            { element: '#activityNavigation', popover: { title: 'Menu Navigasi', description: 'Gunakan menu navigasi untuk berpindah antar aktivitas dan memantau progres pengisian AKUR anda.' } },
+        ]
+    }); 
+    driverObj.drive();
+}
+
 function show() {
     var showResultButton = document.getElementById("showResult");
     showResultButton.innerHTML += '<div class="spinner-border spinner-border-sm text-light ms-2" role="status"><span class="visually-hidden"></span></div>';
