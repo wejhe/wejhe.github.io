@@ -1,4 +1,4 @@
-function onboard() {
+function onboard1() {
     const driver = window.driver.js.driver;
     const driverObj = driver({
         showProgress: true,
@@ -8,6 +8,22 @@ function onboard() {
             { element: '#activityToggle', popover: { title: 'Toggle Aktivitas', description: 'Klik toggle untuk menyesuaikan apakah Kantor Cabang anda telah melakukan aktivitas terkait dan isilah kolom-kolom isian di bawahnya.', side: 'left', align: 'start' } },
             { element: '#activitySimpan', popover: { title: 'Tombol Simpan', description: 'Klik tombol Simpan untuk menyimpan hasil isian anda pada aktivitas ini.', side: 'top', align: 'center' } },
             { element: '#activityNavigation', popover: { title: 'Menu Navigasi', description: 'Gunakan menu navigasi untuk berpindah antar aktivitas dan memantau progres pengisian AKUR anda.', side: 'top', align: 'start' } },
+            { element: '#activityNext', popover: { title: 'Tombol Next', description: 'Silakan klik tombol Next berikut untuk berpindah ke kuesioner selanjutnya.', side: 'top', align: 'center' } },
+        ]
+    });
+    driverObj.drive();
+}
+
+function onboard2() {
+    const driver = window.driver.js.driver;
+    const driverObj = driver({
+        showProgress: true,
+        allowClose: false,
+        steps: [
+            { element: '#activityWarning', popover: { title: 'Bukti Wajib', description: 'Jika anda menemukan kuesioner dengan tanda "wajib minimal 1 bukti", maka anda wajib mengisi kolom "Bukti Pelaksanaan" pada minimal 1 aktivitas. (Anda tidak wajib melampirkan bukti pada kuesioner yang tidak memiliki tanda ini) ', side: 'left', align: 'start' } },
+            { element: '#activityToggle', popover: { description: 'Sebagai contoh, silakan coba untuk klik Toggle Aktivitas ini hingga muncul warna biru, kemudian klik Next.', side: 'top', align: 'center' } },
+            { element: '#buktiPelaksanaan2', popover: { description: 'Anda diwajibkan untuk mengunggah bukti pelaksanaan pada minimal 1 aktivitas yang anda tandai sebagai "Sudah Dilakukan". Bila perlu, anda juga dapat mengunggah bukti pada aktivitas yang lainnya namun sifatnya opsional.', side: 'top', align: 'center' } },
+            { popover: { title: 'Kasus Khusus', description: 'Jika kuesioner ditandai sebagai "wajib minimal 1 bukti" namun anda tidak atau belum melakukan seluruh aktivitas terkait (3 aktivitas ditandai sebagai "Belum Dilakukan), maka anda tidak diwajibkan untuk mengunggah bukti pelaksanaan.', side: 'top', align: 'center' } },
         ]
     });
     driverObj.drive();
