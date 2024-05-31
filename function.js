@@ -362,21 +362,109 @@ function exportAKUR() {
                     var fullDate = date + monthName + year;
 
                     const jsonData = JSON.parse(jsonString);
-                    const blob = new Blob([JSON.stringify(jsonData)], { type: 'application/json' });
-                    const url = URL.createObjectURL(blob);
 
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = fullDate + '_AKUR_' + kodeCabang + '_' + namaCabang + '.json';
-                    document.body.appendChild(link);
+                    function countTrue (coso) {
+                        let count = 0;
 
-                    link.click();
+                        var item1 = "item" + coso + "1";
+                        var item2 = "item" + coso + "2";
+                        var item3 = "item" + coso + "3";
 
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(url);
+                        if (jsonData.item1.status === true) {
+                            count += 1;
+                        }
 
-                    alert("Hasil pengisian AKUR berhasil diekspor dalam bentuk JSON. Silahkan kirimkan file JSON yang telah diunduh kepada SKAI melalui Microsoft Teams untuk dilakukan review lebih lanjut!");
-                    removeElementsByClass("spinner-border spinner-border-sm text-light ms-2");
+                        if (jsonData.item2.status === true) {
+                            count += 1;
+                        }
+
+                        if (jsonData.item3.status === true) {
+                            count += 1;
+                        }
+
+                        return count;
+                    }
+
+                    function countBukti (coso) {
+                        let count = 0;
+
+                        var item1 = "item" + coso + "1";
+                        var item2 = "item" + coso + "2";
+                        var item3 = "item" + coso + "3";
+
+                        if (jsonData.item1.bukti.length > 0) {
+                            count += 1;
+                        }
+
+                        if (jsonData.item2.bukti.length > 0) {
+                            count += 1;
+                        }
+
+                        if (jsonData.item3.bukti.length > 0) {
+                            count += 1;
+                        }
+
+                        return count;
+                    }
+
+                    let listError = [];
+
+                    if (countTrue('12') > 0 && countBukti('12') === 0) {
+                        listError.push("COSO 1 Kuesioner 1");
+                    }
+
+                    if (countTrue('13') > 0 && countBukti('13') === 0) {
+                        listError.push("COSO 1 Kuesioner 3");
+                    }
+
+                    if (countTrue('16') > 0 && countBukti('16') === 0) {
+                        listError.push("COSO 1 Kuesioner 6");
+                    }
+
+                    if (countTrue('21') > 0 && countBukti('21') === 0) {
+                        listError.push("COSO 2 Kuesioner 1");
+                    }
+
+                    if (countTrue('33') > 0 && countBukti('33') === 0) {
+                        listError.push("COSO 3 Kuesioner 3");
+                    }
+
+                    if (countTrue('34') > 0 && countBukti('34') === 0) {
+                        listError.push("COSO 3 Kuesioner 4");
+                    }
+                    
+                    if (countTrue('41') > 0 && countBukti('41') === 0) {
+                        listError.push("COSO 4 Kuesioner 1");
+                    }
+
+                    if (countTrue('42') > 0 && countBukti('42') === 0) {
+                        listError.push("COSO 4 Kuesioner 2");
+                    }
+
+                    if (countTrue('52') > 0 && countBukti('52') === 0) {
+                        listError.push("COSO 5 Kuesioner 2");
+                    }
+
+                    if (listError.length > 0) {
+                        alert("Proses ekspor gagal dilakukan. Anda belum melampirkan bukti pada " + listError + ". Silakan lengkapi bukti-bukti anda terlebih dahulu. Jika kendala terus berlanjut, hubungi SKAI untuk mendapatkan bantuan teknis!");
+                        removeElementsByClass("spinner-border spinner-border-sm text-light ms-2");
+                    } else {
+                        const blob = new Blob([JSON.stringify(jsonData)], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+    
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = fullDate + '_AKUR_' + kodeCabang + '_' + namaCabang + '.json';
+                        document.body.appendChild(link);
+    
+                        link.click();
+    
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(url);
+    
+                        alert("Hasil pengisian AKUR berhasil diekspor dalam bentuk JSON. Silahkan kirimkan file JSON yang telah diunduh kepada SKAI melalui Microsoft Teams untuk dilakukan review lebih lanjut!");
+                        removeElementsByClass("spinner-border spinner-border-sm text-light ms-2");
+                    }
                 } else {
                     alert("Proses ekspor gagal dilakukan. Pastikan progress anda sudah 100% sebelum melakukan ekspor. Jika kendala terus berlanjut, hubungi SKAI untuk mendapatkan bantuan teknis!");
                     removeElementsByClass("spinner-border spinner-border-sm text-light ms-2");
