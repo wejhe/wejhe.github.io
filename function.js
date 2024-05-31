@@ -370,15 +370,15 @@ function exportAKUR() {
                         var item2 = "item" + coso + "2";
                         var item3 = "item" + coso + "3";
 
-                        if (jsonData.item1.status === true) {
+                        if (jsonData[item1].status === true) {
                             count += 1;
                         }
 
-                        if (jsonData.item2.status === true) {
+                        if (jsonData[item2].status === true) {
                             count += 1;
                         }
 
-                        if (jsonData.item3.status === true) {
+                        if (jsonData[item3].status === true) {
                             count += 1;
                         }
 
@@ -392,15 +392,15 @@ function exportAKUR() {
                         var item2 = "item" + coso + "2";
                         var item3 = "item" + coso + "3";
 
-                        if (jsonData.item1.bukti.length > 0) {
+                        if (jsonData[item1].bukti.length > 0) {
                             count += 1;
                         }
 
-                        if (jsonData.item2.bukti.length > 0) {
+                        if (jsonData[item2].bukti.length > 0) {
                             count += 1;
                         }
 
-                        if (jsonData.item3.bukti.length > 0) {
+                        if (jsonData[item3].bukti.length > 0) {
                             count += 1;
                         }
 
