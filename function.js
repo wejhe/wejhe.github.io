@@ -1384,8 +1384,14 @@ function loadData1(coso) {
                 toggleKuesioner1();
 
                 buktiPelaksanaan1Value.remove();
-                buktiPelaksanaan1.innerHTML += '<a href="' + item.bukti + '" target="_blank"><i class="bi bi-file-earmark-play-fill me-2"></i>' + item.namaBukti + '</a>';
-                
+
+                if (item.bukti.length > 0) {
+                    buktiPelaksanaan1.innerHTML += '<a href="' + item.bukti + '" target="_blank"><i class="bi bi-file-earmark-play-fill me-2"></i>' + item.namaBukti + '</a>';
+                } else {
+                    buktiPelaksanaan1.innerHTML += '<i class="bi bi-x-circle-fill me-2"></i>Bukti tidak dilampirkan';
+                    buktiPelaksanaan1.classList.add("text-danger");
+                }
+
                 rencanaTindakLanjut1Value.value = item.rencana;
                 rencanaTindakLanjut1Value.setAttribute("disabled", true);
 
@@ -1418,9 +1424,29 @@ function simpanData1(coso) {
         var targetPerbaikan1Value = document.getElementById("targetPerbaikan1Value").value;
 
         if (toggle1 === true) {
-            var namaBukti = buktiPelaksanaan1Value.name;
-            getBase64(buktiPelaksanaan1Value, function(base64String) {
-                var jsonString = '{"status":true, "namaBukti":"' + namaBukti + '", "bukti":"' + base64String + '", "rencana":"", "target":""}';
+            if (document.getElementById("buktiPelaksanaan1Value").value.length > 0) {
+                var namaBukti = buktiPelaksanaan1Value.name;
+                getBase64(buktiPelaksanaan1Value, function(base64String) {
+                    var jsonString = '{"status":true, "namaBukti":"' + namaBukti + '", "bukti":"' + base64String + '", "rencana":"", "target":""}';
+                    bcas.setItem(itemNo, jsonString)
+                        .then(async () => {
+                            try {
+                                const progressCOSO = await bcas.getItem(progressCOSONo);
+                                var prev = parseInt(progressCOSO);
+                                var next = ++prev;
+                                next = next.toString();
+                                bcas.setItem(progressCOSONo, next)
+                                    .then(() => {
+                                        updateProgress();
+                                        location.href = windowOpen;
+                                    });
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        });
+                });                
+            } else {
+                var jsonString = '{"status":true, "namaBukti":"", "bukti":"", "rencana":"", "target":""}';
                 bcas.setItem(itemNo, jsonString)
                     .then(async () => {
                         try {
@@ -1437,7 +1463,7 @@ function simpanData1(coso) {
                             console.log(error);
                         }
                     });
-            });
+            }
         } else {
             var jsonString = '{"status":false, "namaBukti":"", "bukti":"", "rencana":"' + rencanaTindakLanjut1Value + '", "target":"' + targetPerbaikan1Value + '"}';
             bcas.setItem(itemNo, jsonString)
@@ -1515,8 +1541,14 @@ function loadData2(coso) {
                 toggleKuesioner2();
 
                 buktiPelaksanaan2Value.remove();
-                buktiPelaksanaan2.innerHTML += '<a href="' + item.bukti + '" target="_blank"><i class="bi bi-file-earmark-play-fill me-2"></i>' + item.namaBukti + '</a>';
-                
+
+                if (item.bukti.length > 0) {
+                    buktiPelaksanaan2.innerHTML += '<a href="' + item.bukti + '" target="_blank"><i class="bi bi-file-earmark-play-fill me-2"></i>' + item.namaBukti + '</a>';
+                } else {
+                    buktiPelaksanaan2.innerHTML += '<i class="bi bi-x-circle-fill me-2"></i>Bukti tidak dilampirkan';
+                    buktiPelaksanaan2.classList.add("text-danger");
+                }   
+                             
                 rencanaTindakLanjut2Value.value = item.rencana;
                 rencanaTindakLanjut2Value.setAttribute("disabled", true);
 
@@ -1549,9 +1581,29 @@ function simpanData2(coso) {
         var targetPerbaikan2Value = document.getElementById("targetPerbaikan2Value").value;
 
         if (toggle2 === true) {
-            var namaBukti = buktiPelaksanaan2Value.name;
-            getBase64(buktiPelaksanaan2Value, function(base64String) {
-                var jsonString = '{"status":true, "namaBukti":"' + namaBukti + '", "bukti":"' + base64String + '", "rencana":"", "target":""}';
+            if (document.getElementById("buktiPelaksanaan2Value").value.length > 0) {
+                var namaBukti = buktiPelaksanaan2Value.name;
+                getBase64(buktiPelaksanaan2Value, function(base64String) {
+                    var jsonString = '{"status":true, "namaBukti":"' + namaBukti + '", "bukti":"' + base64String + '", "rencana":"", "target":""}';
+                    bcas.setItem(itemNo, jsonString)
+                        .then(async () => {
+                            try {
+                                const progressCOSO = await bcas.getItem(progressCOSONo);
+                                var prev = parseInt(progressCOSO);
+                                var next = ++prev;
+                                next = next.toString();
+                                bcas.setItem(progressCOSONo, next)
+                                    .then(() => {
+                                        updateProgress();
+                                        location.href = windowOpen;
+                                    });
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        });
+                });
+            } else {
+                var jsonString = '{"status":true, "namaBukti":"", "bukti":"", "rencana":"", "target":""}';
                 bcas.setItem(itemNo, jsonString)
                     .then(async () => {
                         try {
@@ -1567,8 +1619,8 @@ function simpanData2(coso) {
                         } catch (error) {
                             console.log(error);
                         }
-                    });
-            });
+                    });                
+            }
         } else {
             var jsonString = '{"status":false, "namaBukti":"", "bukti":"", "rencana":"' + rencanaTindakLanjut2Value + '", "target":"' + targetPerbaikan2Value + '"}';
             bcas.setItem(itemNo, jsonString)
@@ -1646,8 +1698,14 @@ function loadData3(coso) {
                 toggleKuesioner3();
 
                 buktiPelaksanaan3Value.remove();
-                buktiPelaksanaan3.innerHTML += '<a href="' + item.bukti + '" target="_blank"><i class="bi bi-file-earmark-play-fill me-2"></i>' + item.namaBukti + '</a>';
-                
+
+                if (item.bukti.length > 0) {
+                    buktiPelaksanaan3.innerHTML += '<a href="' + item.bukti + '" target="_blank"><i class="bi bi-file-earmark-play-fill me-2"></i>' + item.namaBukti + '</a>';
+                } else {
+                    buktiPelaksanaan3.innerHTML += '<i class="bi bi-x-circle-fill me-2"></i>Bukti tidak dilampirkan';
+                    buktiPelaksanaan3.classList.add("text-danger");
+                }
+                               
                 rencanaTindakLanjut3Value.value = item.rencana;
                 rencanaTindakLanjut3Value.setAttribute("disabled", true);
 
@@ -1680,9 +1738,29 @@ function simpanData3(coso) {
         var targetPerbaikan3Value = document.getElementById("targetPerbaikan3Value").value;
 
         if (toggle3 === true) {
-            var namaBukti = buktiPelaksanaan3Value.name;
-            getBase64(buktiPelaksanaan3Value, function(base64String) {
-                var jsonString = '{"status":true, "namaBukti":"' + namaBukti + '", "bukti":"' + base64String + '", "rencana":"", "target":""}';
+            if (document.getElementById("buktiPelaksanaan3Value").value.length > 0) {
+                var namaBukti = buktiPelaksanaan3Value.name;
+                getBase64(buktiPelaksanaan3Value, function(base64String) {
+                    var jsonString = '{"status":true, "namaBukti":"' + namaBukti + '", "bukti":"' + base64String + '", "rencana":"", "target":""}';
+                    bcas.setItem(itemNo, jsonString)
+                        .then(async () => {
+                            try {
+                                const progressCOSO = await bcas.getItem(progressCOSONo);
+                                var prev = parseInt(progressCOSO);
+                                var next = ++prev;
+                                next = next.toString();
+                                bcas.setItem(progressCOSONo, next)
+                                    .then(() => {
+                                        updateProgress();
+                                        location.href = windowOpen;
+                                    });
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        });
+                });
+            } else {
+                var jsonString = '{"status":true, "namaBukti":"", "bukti":"", "rencana":"", "target":""}';
                 bcas.setItem(itemNo, jsonString)
                     .then(async () => {
                         try {
@@ -1698,8 +1776,8 @@ function simpanData3(coso) {
                         } catch (error) {
                             console.log(error);
                         }
-                    });
-            });
+                    });                
+            }
         } else {
             var jsonString = '{"status":false, "namaBukti":"", "bukti":"", "rencana":"' + rencanaTindakLanjut3Value + '", "target":"' + targetPerbaikan3Value + '"}';
             bcas.setItem(itemNo, jsonString)
@@ -1753,19 +1831,12 @@ function resetData3(coso) {
 
 function formValidation1() {
     var toggle1 = document.getElementById("toggle1").checked;
-    var buktiPelaksanaan1Value = document.getElementById("buktiPelaksanaan1Value");
     var rencanaTindakLanjut1Value = document.getElementById("rencanaTindakLanjut1Value");
     var targetPerbaikan1Value = document.getElementById("targetPerbaikan1Value");
     var simpan1 = document.getElementById("simpan1");
 
     if (toggle1 === true) {
-        if(
-            buktiPelaksanaan1Value.value.length > 0
-        ) {
-            simpan1.removeAttribute("disabled");
-        } else {
-            simpan1.setAttribute("disabled", true);
-        }
+        simpan1.removeAttribute("disabled");
     } else {
         if(
             rencanaTindakLanjut1Value.value.length > 0
@@ -1817,19 +1888,12 @@ function toggleKuesioner1() {
 
 function formValidation2() {
     var toggle2 = document.getElementById("toggle2").checked;
-    var buktiPelaksanaan2Value = document.getElementById("buktiPelaksanaan2Value");
     var rencanaTindakLanjut2Value = document.getElementById("rencanaTindakLanjut2Value");
     var targetPerbaikan2Value = document.getElementById("targetPerbaikan2Value");
     var simpan2 = document.getElementById("simpan2");
 
     if (toggle2 === true) {
-        if(
-            buktiPelaksanaan2Value.value.length > 0
-        ) {
-            simpan2.removeAttribute("disabled");
-        } else {
-            simpan2.setAttribute("disabled", true);
-        }
+        simpan2.removeAttribute("disabled");
     } else {
         if(
             rencanaTindakLanjut2Value.value.length > 0
@@ -1881,19 +1945,12 @@ function toggleKuesioner2() {
 
 function formValidation3() {
     var toggle3 = document.getElementById("toggle3").checked;
-    var buktiPelaksanaan3Value = document.getElementById("buktiPelaksanaan3Value");
     var rencanaTindakLanjut3Value = document.getElementById("rencanaTindakLanjut3Value");
     var targetPerbaikan3Value = document.getElementById("targetPerbaikan3Value");
     var simpan3 = document.getElementById("simpan3");
 
     if (toggle3 === true) {
-        if(
-            buktiPelaksanaan3Value.value.length > 0
-        ) {
-            simpan3.removeAttribute("disabled");
-        } else {
-            simpan3.setAttribute("disabled", true);
-        }
+        simpan3.removeAttribute("disabled");
     } else {
         if(
             rencanaTindakLanjut3Value.value.length > 0
