@@ -1,3 +1,21 @@
+function onboardHome() {
+    const driver = window.driver.js.driver;
+    const driverObj = driver({
+        showProgress: true,
+        allowClose: false,
+        steps: [
+            { element: '#welcome', popover: { title: 'Nama Cabang', description: 'Berikut merupakan nama Kantor Cabang anda. Pastikan nama cabang sesuai dengan keadaan yang sebenarnya dan anda tidak menggunakan nama Kantor Cabang lain yang bukan menjadi tanggung jawab anda.', side: 'right', align: 'start' } },
+            { element: '#cardProgress', popover: { title: 'Overall Progress', description: 'Komponen ini memuat informasi progres pengisian AKUR secara keseluruhan, sehingga anda dapat memantau sejauh mana pengisian AKUR telah diselesaikan.', side: 'left', align: 'start' } },
+            { element: '#resetButton', popover: { title: 'Tombol Reset', description: 'Anda dapat mengklik tombol RESET DATA yang berada di dalam komponen Overall Progress untuk menghapus seluruh data yang telah anda isikan ke dalam sistem, sehingga anda dapat dan perlu untuk memulai kembali pengisian AKUR dari nol.', side: 'left', align: 'start' } },
+            { element: '#cardCOSO', popover: { title: 'Item COSO', description: 'Terdapat 5 item COSO yang masing-masing terdiri dari sejumlah kuesioner. Anda dapat memantau progres pengisian untuk masing-masing item COSO melalui komponen badge pada masing-masing item COSO.', side: 'right', align: 'start' } },
+            { element: '#buttonCOSO', popover: { title: 'Tombol Buka', description: 'Klik tombol BUKA untuk membuka daftar kuesioner yang terdapat pada masing-masing item COSO.', side: 'top', align: 'start' } },
+            { element: '#logout', popover: { title: 'Tombol Keluar', description: 'Klik tombol KELUAR untuk logout dari sistem pengisian AKUR. Progres pengisian AKUR anda akan tetap tersimpan selama anda tidak menghapus cache browser atau meng-install ulang browser.', side: 'bottom', align: 'end' } },
+            { element: '#export', popover: { title: 'Tombol Ekspor', description: 'Klik tombol EKSPOR HASIL AKUR untuk mengekspor data hasil pengisian AKUR anda ke dalam file JSON (.json) untuk kemudian dikirimkan ke Satuan Kerja Audit Internal (SKAI) guna diproses lebih lanjut. Anda hanya dapat mengekspor hasil AKUR setelah seluruh kuesioner terisi dan overall progres anda bernilai 100%.', side: 'bottom', align: 'end' } },
+        ]
+    });
+    driverObj.drive();
+}
+
 function onboard1() {
     const driver = window.driver.js.driver;
     const driverObj = driver({
