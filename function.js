@@ -543,7 +543,7 @@ function exportAKUR() {
                         doc.fromHTML(makePDF);
                         doc.save("certificate.pdf");
     
-                        alert("Proses ekspor berhasil dilakukan!");
+                        alert("Proses ekspor berhasil dilakukan! Klik OK untuk mencetak Surat Pernyataan Penyerahan Hasil AKUR!");
                         removeElementsByClass("spinner-border spinner-border-sm text-light ms-2");
                     }
                 } else {
