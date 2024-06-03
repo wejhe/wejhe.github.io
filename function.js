@@ -423,7 +423,9 @@ function exportAKUR() {
                         let count = false;
                         var bukti = "bukti" + coso;
 
-                        if (jsonData[bukti].bukti.length > 0) {
+                        if (jsonData[bukti] === "empty") {
+                            count = false;
+                        } else {
                             count = true;
                         }
 
@@ -432,8 +434,11 @@ function exportAKUR() {
 
                     let listError = [];
 
+                    console.log(countTrue('12'));
+                    console.log(checkBukti('12'));
+
                     if (countTrue('12') > 0 && checkBukti('12') === false) {
-                        listError.push(" COSO 1 Kuesioner 1");
+                        listError.push(" COSO 1 Kuesioner 2");
                     }
 
                     if (countTrue('13') > 0 && checkBukti('13') === false) {
@@ -831,23 +836,23 @@ function start() {
                     bcas.setItem("item521", "empty");
                     bcas.setItem("item522", "empty");
                     bcas.setItem("item523", "empty");
-                    bcas.setItem("bukti11", "empty");
-                    bcas.setItem("bukti12", "empty");
-                    bcas.setItem("bukti13", "empty");
-                    bcas.setItem("bukti14", "empty");
-                    bcas.setItem("bukti15", "empty");
-                    bcas.setItem("bukti16", "empty");
-                    bcas.setItem("bukti17", "empty");
-                    bcas.setItem("bukti21", "empty");
-                    bcas.setItem("bukti31", "empty");
-                    bcas.setItem("bukti32", "empty");
-                    bcas.setItem("bukti33", "empty");
-                    bcas.setItem("bukti34", "empty");
-                    bcas.setItem("bukti35", "empty");
-                    bcas.setItem("bukti41", "empty");
-                    bcas.setItem("bukti42", "empty");
-                    bcas.setItem("bukti51", "empty");
-                    bcas.setItem("bukti52", "empty");
+                    bcas.setItem("bukti11", '"empty"');
+                    bcas.setItem("bukti12", '"empty"');
+                    bcas.setItem("bukti13", '"empty"');
+                    bcas.setItem("bukti14", '"empty"');
+                    bcas.setItem("bukti15", '"empty"');
+                    bcas.setItem("bukti16", '"empty"');
+                    bcas.setItem("bukti17", '"empty"');
+                    bcas.setItem("bukti21", '"empty"');
+                    bcas.setItem("bukti31", '"empty"');
+                    bcas.setItem("bukti32", '"empty"');
+                    bcas.setItem("bukti33", '"empty"');
+                    bcas.setItem("bukti34", '"empty"');
+                    bcas.setItem("bukti35", '"empty"');
+                    bcas.setItem("bukti41", '"empty"');
+                    bcas.setItem("bukti42", '"empty"');
+                    bcas.setItem("bukti51", '"empty"');
+                    bcas.setItem("bukti52", '"empty"');
                     window.open("/home.html", "_self");
                 } else {
                     window.open("/home.html", "_self");
@@ -997,23 +1002,23 @@ function resetData() {
         bcas.setItem("item521", "empty");
         bcas.setItem("item522", "empty");
         bcas.setItem("item523", "empty");
-        bcas.setItem("bukti11", "empty");
-        bcas.setItem("bukti12", "empty");
-        bcas.setItem("bukti13", "empty");
-        bcas.setItem("bukti14", "empty");
-        bcas.setItem("bukti15", "empty");
-        bcas.setItem("bukti16", "empty");
-        bcas.setItem("bukti17", "empty");
-        bcas.setItem("bukti21", "empty");
-        bcas.setItem("bukti31", "empty");
-        bcas.setItem("bukti32", "empty");
-        bcas.setItem("bukti33", "empty");
-        bcas.setItem("bukti34", "empty");
-        bcas.setItem("bukti35", "empty");
-        bcas.setItem("bukti41", "empty");
-        bcas.setItem("bukti42", "empty");
-        bcas.setItem("bukti51", "empty");
-        bcas.setItem("bukti52", "empty");
+        bcas.setItem("bukti11", '"empty"');
+        bcas.setItem("bukti12", '"empty"');
+        bcas.setItem("bukti13", '"empty"');
+        bcas.setItem("bukti14", '"empty"');
+        bcas.setItem("bukti15", '"empty"');
+        bcas.setItem("bukti16", '"empty"');
+        bcas.setItem("bukti17", '"empty"');
+        bcas.setItem("bukti21", '"empty"');
+        bcas.setItem("bukti31", '"empty"');
+        bcas.setItem("bukti32", '"empty"');
+        bcas.setItem("bukti33", '"empty"');
+        bcas.setItem("bukti34", '"empty"');
+        bcas.setItem("bukti35", '"empty"');
+        bcas.setItem("bukti41", '"empty"');
+        bcas.setItem("bukti42", '"empty"');
+        bcas.setItem("bukti51", '"empty"');
+        bcas.setItem("bukti52", '"empty"');
         bcas.setItem("showResetToast", true);
 
         sleep(2000).then(() => {
@@ -1623,7 +1628,7 @@ function loadBukti(coso) {
         try {
             const itemJSON = await bcas.getItem(buktiNo);
 
-            if (itemJSON === "empty") {
+            if (itemJSON === '"empty"') {
                 simpanButton.removeAttribute("hidden");
                 resetButton.setAttribute("hidden", true);
             } else {
@@ -1671,7 +1676,7 @@ function resetBukti(coso) {
     resetButton.innerHTML += '<div class="spinner-border spinner-border-sm text-light ms-2" role="status"><span class="visually-hidden"></span></div>';
 
     sleep(1000).then(() => {
-        bcas.setItem(buktiNo, "empty")
+        bcas.setItem(buktiNo, '"empty"')
             .then(() => {
                 location.href = windowOpen;
             });
