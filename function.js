@@ -414,6 +414,11 @@ function exportAKUR() {
                     var year = now.getFullYear().toString();
                     const month = ["01","02","03","04","05","06","07","08","09","10","11","12"];
                     var monthName = month[monthNum];
+
+                    if (date.length == 1) {
+                        date = "0" + date;
+                    }
+
                     var fullDate = date + monthName + year;
 
                     const jsonData = JSON.parse(jsonString);
@@ -510,8 +515,35 @@ function exportAKUR() {
     
                         document.body.removeChild(link);
                         URL.revokeObjectURL(url);
+
+                        const certificate = `<!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Document</title>
+                        </head>
+                        <body style="font-family: Arial, Helvetica, sans-serif; padding-left: 16px">
+                            <h1>Surat Pernyataan Penyerahan Hasil AKUR</h1>
+                            <p>Saya yang bertanda tangan di bawah ini atas nama ${namaCabang}
+                            <br>menyatakan bahwa seluruh informasi yang saya berikan melalui aplikasi AKUR
+                            <br>adalah sah dan benar sesuai dengan keadaan yang sebenarnya.</p>
+                            <br>
+                            <p>............................., ${date} / ${monthName} / ${year}</p>
+                            <br><br><br><br><br>
+                            <p>(.................................................)</p>
+                            <p>Nama Terang dan Tanda Tangan</p>
+                        </body>
+                        </html>`;
+
+                        var fullDate = date + monthName + year;
+                        let doc = new jsPDF("l", "mm", [100, 200]);
+                        let makePDF = certificate;
+
+                        doc.fromHTML(makePDF);
+                        doc.save("certificate.pdf");
     
-                        alert("Hasil pengisian AKUR berhasil diekspor dalam bentuk JSON. Silahkan kirimkan file JSON yang telah diunduh kepada SKAI melalui Microsoft Teams untuk dilakukan review lebih lanjut!");
+                        alert("Proses ekspor berhasil dilakukan!");
                         removeElementsByClass("spinner-border spinner-border-sm text-light ms-2");
                     }
                 } else {
