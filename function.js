@@ -1258,6 +1258,15 @@ function coso5home(){
 function toggleBukti(coso) {
     var buttonUnggahBukti = document.getElementById("unggahBukti");
 
+    (async () => {
+        const bukti = await bcas.getItem("bukti" + coso);
+        if (bukti !== '"empty"') {
+            buttonUnggahBukti.classList.remove("btn-primary");
+            buttonUnggahBukti.classList.add("btn-success");
+            buttonUnggahBukti.innerHTML = '<i class="bi bi-file-earmark-medical-fill me-1"></i>Lihat Bukti'
+        }
+    })();
+
     function countTrue(coso) {
         return new Promise((resolve, reject) => {
             let count = 0;
