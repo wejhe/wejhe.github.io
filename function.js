@@ -82,6 +82,9 @@ function show() {
                 document.getElementById("subHeader").innerText += ' ' + json.namaCabang;
 
                 function updateItem(json, itemNumber) {
+                    var itemNumberSplit = itemNumber.toString().split("");
+                    const buktiNo = 'bukti' + itemNumberSplit[0] + itemNumberSplit[1];
+                    const buktiNoJSON = json[buktiNo];
                     const item = json['item' + itemNumber];
 
                     if (item.status === true) {
@@ -102,10 +105,10 @@ function show() {
                         document.getElementById("target" + itemNumber).innerText = "-";
                     }
 
-                    if (item.bukti.length > 0) {
-                        document.getElementById("bukti" + itemNumber).innerHTML = `<a href="${item.bukti}" target="_blank">${item.namaBukti}</a>`;
+                    if (buktiNoJSON === "empty") {
+                        document.getElementById(buktiNo).innerText = "-";
                     } else {
-                        document.getElementById("bukti" + itemNumber).innerText = "-";
+                        document.getElementById(buktiNo).innerHTML = `<a href="${buktiNoJSON.bukti}" target="_blank">${buktiNoJSON.namaBukti}</a>`;
                     }
                 }
 
