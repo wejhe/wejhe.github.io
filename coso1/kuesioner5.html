@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<body onload="showKuesioner()">
+<body onload="showKuesioner(), toggleBukti('15')">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -106,10 +106,38 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modalUnggahBukti" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Bukti Pelaksanaan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="buktiPelaksanaan" class="mb-3">
+                        <input onchange="formValidation()" id="buktiPelaksanaanValue" class="form-control mb-3" type="file">
+                        <div id="buktiHelp" class="form-text">*Anda hanya dapat mengunggah file tunggal sebagai bukti pelaksanaan. Apabila anda perlu untuk mengunggah lebih dari 1 bukti, silakan satukan bukti-bukti anda ke dalam 1 file ZIP/RAR terlebih dahulu.</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="simpanButton" onclick="simpanBukti('15')" type="button" class="btn btn-primary" hidden disabled>Simpan Bukti</button>
+                    <button id="resetButton" onclick="resetBukti('15')" type="button" class="btn btn-danger" hidden>Reset Bukti</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid py-4">
         <div class="container">
             <div class="alert alert-primary mb-4 px-4" role="alert">
-                <h4 class="alert-heading"><i class="bi bi-book-half me-2"></i>COSO 1 - Kuesioner 5</h4>
+                <div class="row">
+                    <div class="col text-start">
+                        <h4 class="alert-heading"><i class="bi bi-book-half me-2"></i>COSO 1 - Kuesioner 5</h4>
+                    </div>
+                    <div class="col text-end">
+                        <button id="unggahBukti" onclick="loadBukti('15')" class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalUnggahBukti" hidden><i class="bi bi-file-earmark-medical-fill me-1"></i>Unggah Bukti (opsional)</button>
+                    </div>
+                </div>
                 Pengelolaan pekerja dalam hal pemenuhan hak dan kewajiban masing-masing pihak, hubungan dan suasana kerja yang harmonis
             </div>
             <div class="row">
@@ -137,11 +165,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div id="buktiPelaksanaan1" class="mb-3">
-                                    <div class="form-text mb-1">Bukti Pelaksanaan</div>
-                                    <input onchange="formValidation1()" id="buktiPelaksanaan1Value" class="form-control form-control-sm" type="file">
-                                </div>   
+                                </div>  
                                 <div id="rencanaTindakLanjut1" class="mb-3">
                                     <div class="form-text mb-1">Rencana Tindak Lanjut</div>
                                     <textarea onchange="formValidation1()" id="rencanaTindakLanjut1Value" class="form-control" rows="3"></textarea>
@@ -189,10 +213,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="buktiPelaksanaan2" class="mb-3">
-                                    <div class="form-text mb-1">Bukti Pelaksanaan</div>
-                                    <input onchange="formValidation2()" id="buktiPelaksanaan2Value" class="form-control form-control-sm" type="file">
-                                </div>   
                                 <div id="rencanaTindakLanjut2" class="mb-3">
                                     <div class="form-text mb-1">Rencana Tindak Lanjut</div>
                                     <textarea onchange="formValidation2()" id="rencanaTindakLanjut2Value" class="form-control" rows="3"></textarea>
@@ -240,10 +260,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="buktiPelaksanaan3" class="mb-3">
-                                    <div class="form-text mb-1">Bukti Pelaksanaan</div>
-                                    <input onchange="formValidation3()" id="buktiPelaksanaan3Value" class="form-control form-control-sm" type="file">
-                                </div>   
                                 <div id="rencanaTindakLanjut3" class="mb-3">
                                     <div class="form-text mb-1">Rencana Tindak Lanjut</div>
                                     <textarea onchange="formValidation3()" id="rencanaTindakLanjut3Value" class="form-control" rows="3"></textarea>

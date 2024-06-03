@@ -296,6 +296,23 @@ function exportAKUR() {
                 const item521 = await bcas.getItem("item521");
                 const item522 = await bcas.getItem("item522");
                 const item523 = await bcas.getItem("item523");
+                const bukti11 = await bcas.getItem("bukti11");
+                const bukti12 = await bcas.getItem("bukti12");
+                const bukti13 = await bcas.getItem("bukti13");
+                const bukti14 = await bcas.getItem("bukti14");
+                const bukti15 = await bcas.getItem("bukti15");
+                const bukti16 = await bcas.getItem("bukti16");
+                const bukti17 = await bcas.getItem("bukti17");
+                const bukti21 = await bcas.getItem("bukti21");
+                const bukti31 = await bcas.getItem("bukti31");
+                const bukti32 = await bcas.getItem("bukti32");
+                const bukti33 = await bcas.getItem("bukti33");
+                const bukti34 = await bcas.getItem("bukti34");
+                const bukti35 = await bcas.getItem("bukti35");
+                const bukti41 = await bcas.getItem("bukti41");
+                const bukti42 = await bcas.getItem("bukti42");
+                const bukti51 = await bcas.getItem("bukti51");
+                const bukti52 = await bcas.getItem("bukti52");
 
                 if (progressOverall === "100") {
                     const jsonString = `{"kodeCabang": "${kodeCabang}",
@@ -350,7 +367,24 @@ function exportAKUR() {
                     "item513": ${item513},
                     "item521": ${item521},
                     "item522": ${item522},
-                    "item523": ${item523}
+                    "item523": ${item523},
+                    "bukti11": ${bukti11},
+                    "bukti12": ${bukti12},
+                    "bukti13": ${bukti13},
+                    "bukti14": ${bukti14},
+                    "bukti15": ${bukti15},
+                    "bukti16": ${bukti16},
+                    "bukti17": ${bukti17},
+                    "bukti21": ${bukti21},
+                    "bukti31": ${bukti31},
+                    "bukti32": ${bukti32},
+                    "bukti33": ${bukti33},
+                    "bukti34": ${bukti34},
+                    "bukti35": ${bukti35},
+                    "bukti41": ${bukti41},
+                    "bukti42": ${bukti42},
+                    "bukti51": ${bukti51},
+                    "bukti52": ${bukti52}
                     }`;
 
                     var now = new Date();
@@ -385,23 +419,12 @@ function exportAKUR() {
                         return count;
                     }
 
-                    function countBukti (coso) {
-                        let count = 0;
+                    function checkBukti (coso) {
+                        let count = false;
+                        var bukti = "bukti" + coso;
 
-                        var item1 = "item" + coso + "1";
-                        var item2 = "item" + coso + "2";
-                        var item3 = "item" + coso + "3";
-
-                        if (jsonData[item1].bukti.length > 0) {
-                            count += 1;
-                        }
-
-                        if (jsonData[item2].bukti.length > 0) {
-                            count += 1;
-                        }
-
-                        if (jsonData[item3].bukti.length > 0) {
-                            count += 1;
+                        if (jsonData[bukti].bukti.length > 0) {
+                            count = true;
                         }
 
                         return count;
@@ -409,44 +432,44 @@ function exportAKUR() {
 
                     let listError = [];
 
-                    if (countTrue('12') > 0 && countBukti('12') === 0) {
-                        listError.push("COSO 1 Kuesioner 1");
+                    if (countTrue('12') > 0 && checkBukti('12') === false) {
+                        listError.push(" COSO 1 Kuesioner 1");
                     }
 
-                    if (countTrue('13') > 0 && countBukti('13') === 0) {
-                        listError.push("COSO 1 Kuesioner 3");
+                    if (countTrue('13') > 0 && checkBukti('13') === false) {
+                        listError.push(" COSO 1 Kuesioner 3");
                     }
 
-                    if (countTrue('16') > 0 && countBukti('16') === 0) {
-                        listError.push("COSO 1 Kuesioner 6");
+                    if (countTrue('16') > 0 && checkBukti('16') === false) {
+                        listError.push(" COSO 1 Kuesioner 6");
                     }
 
-                    if (countTrue('21') > 0 && countBukti('21') === 0) {
-                        listError.push("COSO 2 Kuesioner 1");
+                    if (countTrue('21') > 0 && checkBukti('21') === false) {
+                        listError.push(" COSO 2 Kuesioner 1");
                     }
 
-                    if (countTrue('33') > 0 && countBukti('33') === 0) {
-                        listError.push("COSO 3 Kuesioner 3");
+                    if (countTrue('33') > 0 && checkBukti('33') === false) {
+                        listError.push(" COSO 3 Kuesioner 3");
                     }
 
-                    if (countTrue('34') > 0 && countBukti('34') === 0) {
-                        listError.push("COSO 3 Kuesioner 4");
+                    if (countTrue('34') > 0 && checkBukti('34') === false) {
+                        listError.push(" COSO 3 Kuesioner 4");
                     }
                     
-                    if (countTrue('41') > 0 && countBukti('41') === 0) {
-                        listError.push("COSO 4 Kuesioner 1");
+                    if (countTrue('41') > 0 && checkBukti('41') === false) {
+                        listError.push(" COSO 4 Kuesioner 1");
                     }
 
-                    if (countTrue('42') > 0 && countBukti('42') === 0) {
-                        listError.push("COSO 4 Kuesioner 2");
+                    if (countTrue('42') > 0 && checkBukti('42') === false) {
+                        listError.push(" COSO 4 Kuesioner 2");
                     }
 
-                    if (countTrue('52') > 0 && countBukti('52') === 0) {
-                        listError.push("COSO 5 Kuesioner 2");
+                    if (countTrue('52') > 0 && checkBukti('52') === false) {
+                        listError.push(" COSO 5 Kuesioner 2");
                     }
 
                     if (listError.length > 0) {
-                        alert("Proses ekspor gagal dilakukan. Anda belum melampirkan bukti pada " + listError + ". Silakan lengkapi bukti-bukti anda terlebih dahulu. Jika kendala terus berlanjut, hubungi SKAI untuk mendapatkan bantuan teknis!");
+                        alert("Proses ekspor gagal dilakukan. Anda belum melampirkan bukti pada" + listError + ". Silakan lengkapi bukti-bukti anda terlebih dahulu. Jika kendala terus berlanjut, hubungi SKAI untuk mendapatkan bantuan teknis!");
                         removeElementsByClass("spinner-border spinner-border-sm text-light ms-2");
                     } else {
                         const blob = new Blob([JSON.stringify(jsonData)], { type: 'application/json' });
@@ -623,6 +646,23 @@ function start() {
                 const item521 = await bcas.getItem("item521");
                 const item522 = await bcas.getItem("item522");
                 const item523 = await bcas.getItem("item523");
+                const bukti11 = await bcas.getItem("bukti11");
+                const bukti12 = await bcas.getItem("bukti12");
+                const bukti13 = await bcas.getItem("bukti13");
+                const bukti14 = await bcas.getItem("bukti14");
+                const bukti15 = await bcas.getItem("bukti15");
+                const bukti16 = await bcas.getItem("bukti16");
+                const bukti17 = await bcas.getItem("bukti17");
+                const bukti21 = await bcas.getItem("bukti21");
+                const bukti31 = await bcas.getItem("bukti31");
+                const bukti32 = await bcas.getItem("bukti32");
+                const bukti33 = await bcas.getItem("bukti33");
+                const bukti34 = await bcas.getItem("bukti34");
+                const bukti35 = await bcas.getItem("bukti35");
+                const bukti41 = await bcas.getItem("bukti41");
+                const bukti42 = await bcas.getItem("bukti42");
+                const bukti51 = await bcas.getItem("bukti51");
+                const bukti52 = await bcas.getItem("bukti52");
 
                 if (
                     progressOverall === null || "NaN"
@@ -699,6 +739,23 @@ function start() {
                     && item521 === null
                     && item522 === null
                     && item523 === null
+                    && bukti11 === null
+                    && bukti12 === null
+                    && bukti13 === null
+                    && bukti14 === null
+                    && bukti15 === null
+                    && bukti16 === null
+                    && bukti17 === null
+                    && bukti21 === null
+                    && bukti31 === null
+                    && bukti32 === null
+                    && bukti33 === null
+                    && bukti34 === null
+                    && bukti35 === null
+                    && bukti41 === null
+                    && bukti42 === null
+                    && bukti51 === null
+                    && bukti52 === null
                 ) {
                     bcas.setItem("progressOverall", "0");
                     bcas.setItem("progressCOSO1", "0");
@@ -774,6 +831,23 @@ function start() {
                     bcas.setItem("item521", "empty");
                     bcas.setItem("item522", "empty");
                     bcas.setItem("item523", "empty");
+                    bcas.setItem("bukti11", "empty");
+                    bcas.setItem("bukti12", "empty");
+                    bcas.setItem("bukti13", "empty");
+                    bcas.setItem("bukti14", "empty");
+                    bcas.setItem("bukti15", "empty");
+                    bcas.setItem("bukti16", "empty");
+                    bcas.setItem("bukti17", "empty");
+                    bcas.setItem("bukti21", "empty");
+                    bcas.setItem("bukti31", "empty");
+                    bcas.setItem("bukti32", "empty");
+                    bcas.setItem("bukti33", "empty");
+                    bcas.setItem("bukti34", "empty");
+                    bcas.setItem("bukti35", "empty");
+                    bcas.setItem("bukti41", "empty");
+                    bcas.setItem("bukti42", "empty");
+                    bcas.setItem("bukti51", "empty");
+                    bcas.setItem("bukti52", "empty");
                     window.open("/home.html", "_self");
                 } else {
                     window.open("/home.html", "_self");
@@ -923,6 +997,23 @@ function resetData() {
         bcas.setItem("item521", "empty");
         bcas.setItem("item522", "empty");
         bcas.setItem("item523", "empty");
+        bcas.setItem("bukti11", "empty");
+        bcas.setItem("bukti12", "empty");
+        bcas.setItem("bukti13", "empty");
+        bcas.setItem("bukti14", "empty");
+        bcas.setItem("bukti15", "empty");
+        bcas.setItem("bukti16", "empty");
+        bcas.setItem("bukti17", "empty");
+        bcas.setItem("bukti21", "empty");
+        bcas.setItem("bukti31", "empty");
+        bcas.setItem("bukti32", "empty");
+        bcas.setItem("bukti33", "empty");
+        bcas.setItem("bukti34", "empty");
+        bcas.setItem("bukti35", "empty");
+        bcas.setItem("bukti41", "empty");
+        bcas.setItem("bukti42", "empty");
+        bcas.setItem("bukti51", "empty");
+        bcas.setItem("bukti52", "empty");
         bcas.setItem("showResetToast", true);
 
         sleep(2000).then(() => {
@@ -1156,6 +1247,57 @@ function coso5home(){
     })();
 }
 
+function toggleBukti(coso) {
+    var buttonUnggahBukti = document.getElementById("unggahBukti");
+
+    function countTrue(coso) {
+        return new Promise((resolve, reject) => {
+            let count = 0;
+    
+            (async () => {
+                try {
+                    const item1String = await bcas.getItem("item" + coso + "1");
+                    const item2String = await bcas.getItem("item" + coso + "2");
+                    const item3String = await bcas.getItem("item" + coso + "3");
+    
+                    if (item1String !== "empty") {
+                        var item1 = JSON.parse(item1String);
+                        if (item1.status === true) {
+                            count += 1;
+                        }
+                    }
+    
+                    if (item2String !== "empty") {
+                        var item2 = JSON.parse(item2String);
+                        if (item2.status === true) {
+                            count += 1;
+                        }
+                    }
+    
+                    if (item3String !== "empty") {
+                        var item3 = JSON.parse(item3String);
+                        if (item3.status === true) {
+                            count += 1;
+                        }
+                    }
+    
+                    resolve(count);
+                } catch (error) {
+                    reject(error);
+                }
+            })();
+        });
+    }
+
+    countTrue(coso).then(result => {
+        if (result > 0) {
+            buttonUnggahBukti.removeAttribute("hidden");
+        } else if (result === 0) {
+            bcas.setItem("bukti" + coso, "empty");
+        }
+    })
+}
+
 function showKuesioner() {
     notLoginCheck();
     updateProgress();
@@ -1168,8 +1310,6 @@ function showKuesioner() {
 
     (async () => {
         try {
-            const namaCabang = await bcas.getItem("namaCabang");
-            const kodeCabang = await bcas.getItem("kodeCabang");
             const progressOverall = await bcas.getItem("progressOverall");
             const progressCOSO11 = await bcas.getItem("progressCOSO11");
             const progressCOSO12 = await bcas.getItem("progressCOSO12");
@@ -1462,12 +1602,86 @@ function updateProgress() {
     })();
 }
 
+function formValidation() {
+    var buktiPelaksanaanValue = document.getElementById("buktiPelaksanaanValue").value;
+    var simpanButton = document.getElementById("simpanButton");
+
+    if (buktiPelaksanaanValue.length > 0) {
+        simpanButton.removeAttribute("disabled");
+    } else {
+        simpanButton.setAttribute("disabled", true);
+    }
+}
+
+function loadBukti(coso) {
+    var buktiNo = "bukti" + coso;
+    var buktiPelaksanaan = document.getElementById("buktiPelaksanaan");
+    var simpanButton = document.getElementById("simpanButton");
+    var resetButton = document.getElementById("resetButton");
+
+    (async () => {
+        try {
+            const itemJSON = await bcas.getItem(buktiNo);
+
+            if (itemJSON === "empty") {
+                simpanButton.removeAttribute("hidden");
+                resetButton.setAttribute("hidden", true);
+            } else {
+                var item = JSON.parse(itemJSON);
+
+                buktiPelaksanaan.innerHTML = '<a href="' + item.bukti + '" target="_blank"><i class="bi bi-file-earmark-play-fill me-2"></i>' + item.namaBukti + '</a>';
+
+                simpanButton.setAttribute("hidden", true);
+                resetButton.removeAttribute("hidden");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    })();
+}
+
+function simpanBukti(coso) {
+    var buktiNo = "bukti" + coso;
+    var cosoSplit = coso.split("");
+    var windowOpen = '/coso' + cosoSplit[0] + '/kuesioner' + cosoSplit[1] + '.html';
+
+    var simpanButton = document.getElementById("simpanButton");
+    simpanButton.innerHTML += '<div class="spinner-border spinner-border-sm text-light ms-2" role="status"><span class="visually-hidden"></span></div>';
+
+    sleep(1000).then(() => {
+        var buktiPelaksanaanValue = document.getElementById("buktiPelaksanaanValue").files[0];
+
+        var namaBukti = buktiPelaksanaanValue.name;
+        getBase64(buktiPelaksanaanValue, function(base64String) {
+            var jsonString = '{"namaBukti":"' + namaBukti + '", "bukti":"' + base64String + '"}';
+            bcas.setItem(buktiNo, jsonString)
+                .then(() => {
+                    location.href = windowOpen;
+                });
+        });
+    })
+}
+
+function resetBukti(coso) {
+    var buktiNo = "bukti" + coso;
+    var cosoSplit = coso.split("");
+    var windowOpen = '/coso' + cosoSplit[0] + '/kuesioner' + cosoSplit[1] + '.html';
+
+    var resetButton = document.getElementById("resetButton");
+    resetButton.innerHTML += '<div class="spinner-border spinner-border-sm text-light ms-2" role="status"><span class="visually-hidden"></span></div>';
+
+    sleep(1000).then(() => {
+        bcas.setItem(buktiNo, "empty")
+            .then(() => {
+                location.href = windowOpen;
+            });
+    }) 
+}
+
 function loadData1(coso) {
     var itemNo = "item" + coso + "1";
 
     var toggle1 = document.getElementById("toggle1");
-    var buktiPelaksanaan1 = document.getElementById("buktiPelaksanaan1");
-    var buktiPelaksanaan1Value = document.getElementById("buktiPelaksanaan1Value");
     var rencanaTindakLanjut1Value = document.getElementById("rencanaTindakLanjut1Value");
     var targetPerbaikan1Value = document.getElementById("targetPerbaikan1Value");
     var simpan1 = document.getElementById("simpan1");
@@ -1486,15 +1700,6 @@ function loadData1(coso) {
                 toggle1.checked = item.status;
                 toggle1.setAttribute("disabled", true);
                 toggleKuesioner1();
-
-                buktiPelaksanaan1Value.remove();
-
-                if (item.bukti.length > 0) {
-                    buktiPelaksanaan1.innerHTML += '<a href="' + item.bukti + '" target="_blank"><i class="bi bi-file-earmark-play-fill me-2"></i>' + item.namaBukti + '</a>';
-                } else {
-                    buktiPelaksanaan1.innerHTML += '<i class="bi bi-x-circle-fill me-2"></i>Bukti tidak dilampirkan';
-                    buktiPelaksanaan1.classList.add("text-danger");
-                }
 
                 rencanaTindakLanjut1Value.value = item.rencana;
                 rencanaTindakLanjut1Value.setAttribute("disabled", true);
@@ -1523,53 +1728,29 @@ function simpanData1(coso) {
 
     sleep(1000).then(() => {
         var toggle1 = document.getElementById("toggle1").checked;
-        var buktiPelaksanaan1Value = document.getElementById("buktiPelaksanaan1Value").files[0];
         var rencanaTindakLanjut1Value = document.getElementById("rencanaTindakLanjut1Value").value;
         var targetPerbaikan1Value = document.getElementById("targetPerbaikan1Value").value;
 
         if (toggle1 === true) {
-            if (document.getElementById("buktiPelaksanaan1Value").value.length > 0) {
-                var namaBukti = buktiPelaksanaan1Value.name;
-                getBase64(buktiPelaksanaan1Value, function(base64String) {
-                    var jsonString = '{"status":true, "namaBukti":"' + namaBukti + '", "bukti":"' + base64String + '", "rencana":"", "target":""}';
-                    bcas.setItem(itemNo, jsonString)
-                        .then(async () => {
-                            try {
-                                const progressCOSO = await bcas.getItem(progressCOSONo);
-                                var prev = parseInt(progressCOSO);
-                                var next = ++prev;
-                                next = next.toString();
-                                bcas.setItem(progressCOSONo, next)
-                                    .then(() => {
-                                        updateProgress();
-                                        location.href = windowOpen;
-                                    });
-                            } catch (error) {
-                                console.log(error);
-                            }
-                        });
-                });                
-            } else {
-                var jsonString = '{"status":true, "namaBukti":"", "bukti":"", "rencana":"", "target":""}';
-                bcas.setItem(itemNo, jsonString)
-                    .then(async () => {
-                        try {
-                            const progressCOSO = await bcas.getItem(progressCOSONo);
-                            var prev = parseInt(progressCOSO);
-                            var next = ++prev;
-                            next = next.toString();
-                            bcas.setItem(progressCOSONo, next)
-                                .then(() => {
-                                    updateProgress();
-                                    location.href = windowOpen;
-                                });
-                        } catch (error) {
-                            console.log(error);
-                        }
-                    });
-            }
+            var jsonString = '{"status":true, "rencana":"", "target":""}';
+            bcas.setItem(itemNo, jsonString)
+                .then(async () => {
+                    try {
+                        const progressCOSO = await bcas.getItem(progressCOSONo);
+                        var prev = parseInt(progressCOSO);
+                        var next = ++prev;
+                        next = next.toString();
+                        bcas.setItem(progressCOSONo, next)
+                            .then(() => {
+                                updateProgress();
+                                location.href = windowOpen;
+                            });
+                    } catch (error) {
+                        console.log(error);
+                    }
+                });
         } else {
-            var jsonString = '{"status":false, "namaBukti":"", "bukti":"", "rencana":"' + rencanaTindakLanjut1Value + '", "target":"' + targetPerbaikan1Value + '"}';
+            var jsonString = '{"status":false, "rencana":"' + rencanaTindakLanjut1Value + '", "target":"' + targetPerbaikan1Value + '"}';
             bcas.setItem(itemNo, jsonString)
                 .then(async () => {
                     try {
@@ -1623,8 +1804,6 @@ function loadData2(coso) {
     var itemNo = "item" + coso + "2";
 
     var toggle2 = document.getElementById("toggle2");
-    var buktiPelaksanaan2 = document.getElementById("buktiPelaksanaan2");
-    var buktiPelaksanaan2Value = document.getElementById("buktiPelaksanaan2Value");
     var rencanaTindakLanjut2Value = document.getElementById("rencanaTindakLanjut2Value");
     var targetPerbaikan2Value = document.getElementById("targetPerbaikan2Value");
     var simpan2 = document.getElementById("simpan2");
@@ -1643,15 +1822,6 @@ function loadData2(coso) {
                 toggle2.checked = item.status;
                 toggle2.setAttribute("disabled", true);
                 toggleKuesioner2();
-
-                buktiPelaksanaan2Value.remove();
-
-                if (item.bukti.length > 0) {
-                    buktiPelaksanaan2.innerHTML += '<a href="' + item.bukti + '" target="_blank"><i class="bi bi-file-earmark-play-fill me-2"></i>' + item.namaBukti + '</a>';
-                } else {
-                    buktiPelaksanaan2.innerHTML += '<i class="bi bi-x-circle-fill me-2"></i>Bukti tidak dilampirkan';
-                    buktiPelaksanaan2.classList.add("text-danger");
-                }   
                              
                 rencanaTindakLanjut2Value.value = item.rencana;
                 rencanaTindakLanjut2Value.setAttribute("disabled", true);
@@ -1680,34 +1850,11 @@ function simpanData2(coso) {
 
     sleep(1000).then(() => {
         var toggle2 = document.getElementById("toggle2").checked;
-        var buktiPelaksanaan2Value = document.getElementById("buktiPelaksanaan2Value").files[0];
         var rencanaTindakLanjut2Value = document.getElementById("rencanaTindakLanjut2Value").value;
         var targetPerbaikan2Value = document.getElementById("targetPerbaikan2Value").value;
 
         if (toggle2 === true) {
-            if (document.getElementById("buktiPelaksanaan2Value").value.length > 0) {
-                var namaBukti = buktiPelaksanaan2Value.name;
-                getBase64(buktiPelaksanaan2Value, function(base64String) {
-                    var jsonString = '{"status":true, "namaBukti":"' + namaBukti + '", "bukti":"' + base64String + '", "rencana":"", "target":""}';
-                    bcas.setItem(itemNo, jsonString)
-                        .then(async () => {
-                            try {
-                                const progressCOSO = await bcas.getItem(progressCOSONo);
-                                var prev = parseInt(progressCOSO);
-                                var next = ++prev;
-                                next = next.toString();
-                                bcas.setItem(progressCOSONo, next)
-                                    .then(() => {
-                                        updateProgress();
-                                        location.href = windowOpen;
-                                    });
-                            } catch (error) {
-                                console.log(error);
-                            }
-                        });
-                });
-            } else {
-                var jsonString = '{"status":true, "namaBukti":"", "bukti":"", "rencana":"", "target":""}';
+            var jsonString = '{"status":true, "rencana":"", "target":""}';
                 bcas.setItem(itemNo, jsonString)
                     .then(async () => {
                         try {
@@ -1723,10 +1870,9 @@ function simpanData2(coso) {
                         } catch (error) {
                             console.log(error);
                         }
-                    });                
-            }
+                    });
         } else {
-            var jsonString = '{"status":false, "namaBukti":"", "bukti":"", "rencana":"' + rencanaTindakLanjut2Value + '", "target":"' + targetPerbaikan2Value + '"}';
+            var jsonString = '{"status":false, "rencana":"' + rencanaTindakLanjut2Value + '", "target":"' + targetPerbaikan2Value + '"}';
             bcas.setItem(itemNo, jsonString)
                 .then(async () => {
                     try {
@@ -1780,8 +1926,6 @@ function loadData3(coso) {
     var itemNo = "item" + coso + "3";
 
     var toggle3 = document.getElementById("toggle3");
-    var buktiPelaksanaan3 = document.getElementById("buktiPelaksanaan3");
-    var buktiPelaksanaan3Value = document.getElementById("buktiPelaksanaan3Value");
     var rencanaTindakLanjut3Value = document.getElementById("rencanaTindakLanjut3Value");
     var targetPerbaikan3Value = document.getElementById("targetPerbaikan3Value");
     var simpan3 = document.getElementById("simpan3");
@@ -1800,15 +1944,6 @@ function loadData3(coso) {
                 toggle3.checked = item.status;
                 toggle3.setAttribute("disabled", true);
                 toggleKuesioner3();
-
-                buktiPelaksanaan3Value.remove();
-
-                if (item.bukti.length > 0) {
-                    buktiPelaksanaan3.innerHTML += '<a href="' + item.bukti + '" target="_blank"><i class="bi bi-file-earmark-play-fill me-2"></i>' + item.namaBukti + '</a>';
-                } else {
-                    buktiPelaksanaan3.innerHTML += '<i class="bi bi-x-circle-fill me-2"></i>Bukti tidak dilampirkan';
-                    buktiPelaksanaan3.classList.add("text-danger");
-                }
                                
                 rencanaTindakLanjut3Value.value = item.rencana;
                 rencanaTindakLanjut3Value.setAttribute("disabled", true);
@@ -1837,34 +1972,11 @@ function simpanData3(coso) {
 
     sleep(1000).then(() => {
         var toggle3 = document.getElementById("toggle3").checked;
-        var buktiPelaksanaan3Value = document.getElementById("buktiPelaksanaan3Value").files[0];
         var rencanaTindakLanjut3Value = document.getElementById("rencanaTindakLanjut3Value").value;
         var targetPerbaikan3Value = document.getElementById("targetPerbaikan3Value").value;
 
         if (toggle3 === true) {
-            if (document.getElementById("buktiPelaksanaan3Value").value.length > 0) {
-                var namaBukti = buktiPelaksanaan3Value.name;
-                getBase64(buktiPelaksanaan3Value, function(base64String) {
-                    var jsonString = '{"status":true, "namaBukti":"' + namaBukti + '", "bukti":"' + base64String + '", "rencana":"", "target":""}';
-                    bcas.setItem(itemNo, jsonString)
-                        .then(async () => {
-                            try {
-                                const progressCOSO = await bcas.getItem(progressCOSONo);
-                                var prev = parseInt(progressCOSO);
-                                var next = ++prev;
-                                next = next.toString();
-                                bcas.setItem(progressCOSONo, next)
-                                    .then(() => {
-                                        updateProgress();
-                                        location.href = windowOpen;
-                                    });
-                            } catch (error) {
-                                console.log(error);
-                            }
-                        });
-                });
-            } else {
-                var jsonString = '{"status":true, "namaBukti":"", "bukti":"", "rencana":"", "target":""}';
+            var jsonString = '{"status":true, "rencana":"", "target":""}';
                 bcas.setItem(itemNo, jsonString)
                     .then(async () => {
                         try {
@@ -1880,10 +1992,9 @@ function simpanData3(coso) {
                         } catch (error) {
                             console.log(error);
                         }
-                    });                
-            }
+                    });
         } else {
-            var jsonString = '{"status":false, "namaBukti":"", "bukti":"", "rencana":"' + rencanaTindakLanjut3Value + '", "target":"' + targetPerbaikan3Value + '"}';
+            var jsonString = '{"status":false, "rencana":"' + rencanaTindakLanjut3Value + '", "target":"' + targetPerbaikan3Value + '"}';
             bcas.setItem(itemNo, jsonString)
                 .then(async () => {
                     try {
@@ -1955,7 +2066,6 @@ function formValidation1() {
 
 function toggleKuesioner1() {
     var toggle1 = document.getElementById("toggle1").checked;
-    var buktiPelaksanaan1 = document.getElementById("buktiPelaksanaan1");
     var rencanaTindakLanjut1 = document.getElementById("rencanaTindakLanjut1");
     var targetPerbaikan1 = document.getElementById("targetPerbaikan1");
     var sudah1 = document.getElementById("sudah1");
@@ -1972,7 +2082,6 @@ function toggleKuesioner1() {
         sudah1.classList.add("text-success");
         ikonSudah1.removeAttribute("hidden");
         ikonBelum1.setAttribute("hidden", true);
-        buktiPelaksanaan1.removeAttribute("hidden");
         rencanaTindakLanjut1.setAttribute("hidden", true);
         targetPerbaikan1.setAttribute("hidden", true);
     } else {
@@ -1984,7 +2093,6 @@ function toggleKuesioner1() {
         belum1.classList.add("text-danger");
         ikonBelum1.removeAttribute("hidden");
         ikonSudah1.setAttribute("hidden", true);
-        buktiPelaksanaan1.setAttribute("hidden", true);
         rencanaTindakLanjut1.removeAttribute("hidden");
         targetPerbaikan1.removeAttribute("hidden");
     }
@@ -2012,7 +2120,6 @@ function formValidation2() {
 
 function toggleKuesioner2() {
     var toggle2 = document.getElementById("toggle2").checked;
-    var buktiPelaksanaan2 = document.getElementById("buktiPelaksanaan2");
     var rencanaTindakLanjut2 = document.getElementById("rencanaTindakLanjut2");
     var targetPerbaikan2 = document.getElementById("targetPerbaikan2");
     var sudah2 = document.getElementById("sudah2");
@@ -2029,7 +2136,6 @@ function toggleKuesioner2() {
         sudah2.classList.add("text-success");
         ikonSudah2.removeAttribute("hidden");
         ikonBelum2.setAttribute("hidden", true);
-        buktiPelaksanaan2.removeAttribute("hidden");
         rencanaTindakLanjut2.setAttribute("hidden", true);
         targetPerbaikan2.setAttribute("hidden", true);
     } else {
@@ -2041,7 +2147,6 @@ function toggleKuesioner2() {
         belum2.classList.add("text-danger");
         ikonBelum2.removeAttribute("hidden");
         ikonSudah2.setAttribute("hidden", true);
-        buktiPelaksanaan2.setAttribute("hidden", true);
         rencanaTindakLanjut2.removeAttribute("hidden");
         targetPerbaikan2.removeAttribute("hidden");
     }
@@ -2069,7 +2174,6 @@ function formValidation3() {
 
 function toggleKuesioner3() {
     var toggle3 = document.getElementById("toggle3").checked;
-    var buktiPelaksanaan3 = document.getElementById("buktiPelaksanaan3");
     var rencanaTindakLanjut3 = document.getElementById("rencanaTindakLanjut3");
     var targetPerbaikan3 = document.getElementById("targetPerbaikan3");
     var sudah3 = document.getElementById("sudah3");
@@ -2086,7 +2190,6 @@ function toggleKuesioner3() {
         sudah3.classList.add("text-success");
         ikonSudah3.removeAttribute("hidden");
         ikonBelum3.setAttribute("hidden", true);
-        buktiPelaksanaan3.removeAttribute("hidden");
         rencanaTindakLanjut3.setAttribute("hidden", true);
         targetPerbaikan3.setAttribute("hidden", true);
     } else {
@@ -2098,7 +2201,6 @@ function toggleKuesioner3() {
         belum3.classList.add("text-danger");
         ikonBelum3.removeAttribute("hidden");
         ikonSudah3.setAttribute("hidden", true);
-        buktiPelaksanaan3.setAttribute("hidden", true);
         rencanaTindakLanjut3.removeAttribute("hidden");
         targetPerbaikan3.removeAttribute("hidden");
     }
