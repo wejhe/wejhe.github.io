@@ -534,7 +534,7 @@ function exportAKUR() {
                         </html>`;
 
                         var fullDate = date + monthName + year;
-                        let doc = new jsPDF("l", "mm", [200, 200]);
+                        let doc = new jsPDF("l", "mm", [100, 200]);
                         let makePDF = certificate;
 
                         doc.fromHTML(makePDF);
