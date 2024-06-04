@@ -17,8 +17,49 @@
     <script src="/dbconfig.js"></script>
     <script src="/function.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
+    <div id="certificateNavbar" class="container-fluid bg-light py-3" hidden>
+        <div class="container">
+            <div class="row">
+                <div class="col text-start">
+                    <a href="/home.html" type="button" class="btn btn-outline-dark"><i class="bi bi-arrow-left me-2"></i>Back to Home</a>
+                </div>
+                <div class="col text-end">
+                    <button id="unduhSertifikat" onclick="unduhSertifikat('certificate')" class="btn btn-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Sertifikat wajib diunduh dan ditandatangani oleh Pejabat yang bertanggung jawab dalam pengisian AKUR"><i class="bi bi-envelope-arrow-down-fill me-2"></i>Unduh Sertifikat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="certificateBody" class="container-fluid py-5" hidden>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div id="certificate" class="col-md-8 border">
+                    <p class="text-center pt-5">
+                        <img src="/img/logo-blue.png" height="40px">
+                    </p>
+                    <h5 class="fw-bold text-center pt-3">Surat Pernyataan Penyerahan Hasil AKUR</h5>
+                    <p id="certificateCabang" class="text-center pt-3">
+                        Saya yang bertandatangan di bawah ini atas nama KC JATINEGARA JKT
+                        <br>menyatakan bahwa seluruh informasi yang saya berikan melalui aplikasi AKUR
+                        <br>adalah sah dan benar sesuai dengan keadaan yang sebenarnya.
+                    </p>
+                    <p id="certificateTanggal" class="text-center pt-3">_______________ , 5 Juni 2024</p>
+                    <br>
+                    <br>
+                    <br>
+                    <p class="text-center pt-3">( ____________________________ )</p>
+                    <p class="text-center pb-4" style="font-size: smaller; margin-top: -1em;">Tanda Tangan dan Nama Terang</p>
+                </div>
+                <div class="col-md-2">       
+                </div>
+            </div>
+        </div>
+    </div>
     
-    <div class="container-fluid bg-light py-3">
+    <div id="homeNavbar" class="container-fluid bg-light py-3">
         <div class="container">
             <div class="row">
                 <div class="col text-start">
@@ -210,7 +251,7 @@
         </div>
     </div>
 
-    <div class="container-fluid py-4">
+    <div id="homeHeader" class="container-fluid py-4">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -255,7 +296,7 @@
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div id="homeBody" class="container-fluid">
         <div class="container">
             <div class="row">
                 <div class="col">

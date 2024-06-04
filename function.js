@@ -1,3 +1,18 @@
+function unduhSertifikat(certificate) {
+    var element = document.getElementById(certificate);
+    var content = element.innerHTML;
+    var originalDocument = document.body.innerHTML;
+
+    // Replace document content with element content
+    document.body.innerHTML = content;
+
+    // Trigger print
+    window.print();
+
+    // Restore original document content
+    document.body.innerHTML = originalDocument;
+}
+
 function onboardHome() {
     const driver = window.driver.js.driver;
     const driverObj = driver({
@@ -500,6 +515,7 @@ function exportAKUR() {
                         alert("Proses ekspor gagal dilakukan. Anda belum melampirkan bukti pada" + listError + ". Silakan lengkapi bukti-bukti anda terlebih dahulu. Jika kendala terus berlanjut, hubungi SKAI untuk mendapatkan bantuan teknis!");
                         removeElementsByClass("spinner-border spinner-border-sm text-light ms-2");
                     } else {
+                        var certificateDate = date + " / " + monthName + " / " + year;
                         const blob = new Blob([JSON.stringify(jsonData)], { type: 'application/json' });
                         const url = URL.createObjectURL(blob);
     
@@ -512,36 +528,17 @@ function exportAKUR() {
     
                         document.body.removeChild(link);
                         URL.revokeObjectURL(url);
-
-                        const certificate = `<!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>Document</title>
-                        </head>
-                        <body style="font-family: Arial, Helvetica, sans-serif; padding-left: 16px">
-                            <h1>Surat Pernyataan Penyerahan Hasil AKUR</h1>
-                            <p>Saya yang bertanda tangan di bawah ini atas nama ${namaCabang}
-                            <br>menyatakan bahwa seluruh informasi yang saya berikan melalui aplikasi AKUR
-                            <br>adalah sah dan benar sesuai dengan keadaan yang sebenarnya.</p>
-                            <br>
-                            <p>............................., ${date} / ${monthName} / ${year}</p>
-                            <br><br><br><br><br>
-                            <p>(.................................................)</p>
-                            <p>Nama Terang dan Tanda Tangan</p>
-                        </body>
-                        </html>`;
-
-                        var fullDate = date + monthName + year;
-                        let doc = new jsPDF("l", "mm", [100, 200]);
-                        let makePDF = certificate;
-
-                        doc.fromHTML(makePDF);
-                        doc.save("certificate.pdf");
     
                         alert("Proses ekspor berhasil dilakukan! Klik OK untuk mencetak Surat Pernyataan Penyerahan Hasil AKUR!");
                         removeElementsByClass("spinner-border spinner-border-sm text-light ms-2");
+
+                        document.getElementById("homeNavbar").setAttribute("hidden", true);
+                        document.getElementById("homeHeader").setAttribute("hidden", true);
+                        document.getElementById("homeBody").setAttribute("hidden", true);
+                        document.getElementById("certificateNavbar").removeAttribute("hidden");
+                        document.getElementById("certificateBody").removeAttribute("hidden");
+                        document.getElementById("certificateCabang").innerHTML = `Saya yang bertandatangan di bawah ini atas nama ${namaCabang}<br>menyatakan bahwa seluruh informasi yang saya berikan melalui aplikasi AKUR<br>adalah sah dan benar sesuai dengan keadaan yang sebenarnya.`;
+                        document.getElementById("certificateTanggal").innerText = `_______________ , ${certificateDate}`;
                     }
                 } else {
                     alert("Proses ekspor gagal dilakukan. Pastikan progress anda sudah 100% sebelum melakukan ekspor. Jika kendala terus berlanjut, hubungi SKAI untuk mendapatkan bantuan teknis!");
