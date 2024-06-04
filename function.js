@@ -1304,7 +1304,7 @@ function toggleBukti(coso) {
 
     (async () => {
         const bukti = await bcas.getItem("bukti" + coso);
-        if (bukti !== "empty") {
+        if (bukti !== '"empty"') {
             buttonUnggahBukti.classList.remove("btn-primary");
             buttonUnggahBukti.classList.add("btn-success");
             buttonUnggahBukti.innerHTML = '<i class="bi bi-file-earmark-medical-fill me-1"></i>Lihat Bukti'
@@ -1354,7 +1354,7 @@ function toggleBukti(coso) {
         if (result > 0) {
             buttonUnggahBukti.removeAttribute("hidden");
         } else if (result === 0) {
-            bcas.setItem("bukti" + coso, "empty");
+            bcas.setItem("bukti" + coso, '"empty"');
         }
     })
 }
