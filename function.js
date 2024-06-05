@@ -915,6 +915,8 @@ function welcome() {
     notLoginCheck();
     updateProgress();
 
+    console.log("OK");
+
     (async () => {
         try {
             const showLoginToast = await bcas.getItem("showLoginToast");
