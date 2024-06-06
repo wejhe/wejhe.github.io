@@ -13,6 +13,18 @@ function unduhSertifikat(certificate) {
     document.body.innerHTML = originalDocument;
 }
 
+function onboardSertifikat() {
+    const driver = window.driver.js.driver;
+    const driverObj = driver({
+        showProgress: true,
+        allowClose: false,
+        steps: [
+            { element: '#unduhSertifikat', popover: { title: 'Unduh Sertifikat', description: 'Sertifikat wajib diunduh dan ditandatangani oleh Pejabat yang bertanggung jawab dalam pengisian AKUR.', side: 'right', align: 'start' } },
+        ]
+    });
+    driverObj.drive();
+}
+
 function onboardHome() {
     const driver = window.driver.js.driver;
     const driverObj = driver({
@@ -539,6 +551,8 @@ function exportAKUR() {
                         document.getElementById("certificateBody").removeAttribute("hidden");
                         document.getElementById("certificateCabang").innerHTML = `Saya yang bertandatangan di bawah ini atas nama ${namaCabang}<br>menyatakan bahwa seluruh informasi yang saya berikan melalui aplikasi AKUR<br>adalah sah dan benar sesuai dengan keadaan yang sebenarnya.`;
                         document.getElementById("certificateTanggal").innerText = `_______________ , ${certificateDate}`;
+
+                        onboardSertifikat();
                     }
                 } else {
                     alert("Proses ekspor gagal dilakukan. Pastikan progress anda sudah 100% sebelum melakukan ekspor. Jika kendala terus berlanjut, hubungi SKAI untuk mendapatkan bantuan teknis!");
@@ -915,7 +929,7 @@ function welcome() {
     notLoginCheck();
     updateProgress();
 
-    console.log("OK");
+    console.info("OK");
 
     (async () => {
         try {
