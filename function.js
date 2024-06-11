@@ -214,7 +214,15 @@ function show() {
                         totalSkorAkhir += skorAkhir;
                     });
 
-                    if (totalSkorAkhir <= 1500 && totalSkorAkhir >= 1511) {
+                    /*
+                        1151 - 1500 = SANGAT BAIK
+                        651 - 1150 = BAIK
+                        351 - 650 = CUKUP BAIK
+                        151 - 350 = TIDAK BAIK
+                        0 - 150 = BURUK
+                    */
+
+                    if (totalSkorAkhir <= 1500 && totalSkorAkhir >= 1151) {
                         eProfilRisiko.innerText = "SANGAT BAIK";
                     } else if (totalSkorAkhir <= 1150 && totalSkorAkhir >= 651){
                         eProfilRisiko.innerText = "BAIK";
