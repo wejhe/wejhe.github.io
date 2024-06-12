@@ -74,6 +74,77 @@ function onboard2() {
     driverObj.drive();
 }
 
+function changeSkorAkhir(buktiNumber) {
+    const skorAkhirNo = 'skorAkhir' + buktiNumber;
+    const bobotNo = 'bobot' + buktiNumber
+
+    var skorAkhir = document.getElementById(skorAkhirNo);
+    var bobot = document.getElementById(bobotNo).value;
+    var skorAkhirAwal = localStorage.getItem(skorAkhirNo);
+
+    skorAkhir.innerText = skorAkhirAwal * parseInt(bobot) / 100;
+
+    changeProfilRisiko();
+}
+
+function changeProfilRisiko() {
+                    /*
+                        1151 - 1500 = SANGAT BAIK
+                        651 - 1150 = BAIK
+                        351 - 650 = CUKUP BAIK
+                        151 - 350 = TIDAK BAIK
+                        0 - 150 = BURUK
+
+                        TOTAL SUNTER (MAX) = 800 (dari 1500) -> BAIK
+
+                        1) Distribusi tingkat risiko -> agar mampu mencapai total 1500
+                        <atau>
+                        2) Formulasi ulang kategori dengan TOP THRESHOLD = MAX SCORE
+
+                        VALIDASI BUKTI & PEMBOBOTAN
+                        Kualitas Bukti                    % Bobot dari Skor Akhir
+                        ---------------------------------------------------------
+                        Koheren dan Cukup                 100
+                        Koheren tapi Kurang Cukup         50
+                        Tidak Koheren / Tanpa Bukti       0
+                        <atau>
+                        % Bobot ditentukan oleh Validator (skala 0 sampai 100)
+                    */
+    
+    let totalSkorAkhir = 0;
+    const eProfilRisiko = document.getElementById("profilRisiko");
+
+    const kuesioners = [
+        11, 12, 13, 14, 15, 16, 17,
+        21,
+        31, 32, 33, 34, 35,
+        41, 42,
+        51, 52
+    ];
+
+    kuesioners.forEach(kuesioner => {
+        const skorAkhir = parseInt(document.getElementById("skorAkhir" + kuesioner).innerText);
+        totalSkorAkhir += skorAkhir;
+    });
+
+    if (totalSkorAkhir <= 1500 && totalSkorAkhir >= 1151) {
+        eProfilRisiko.innerText = "SANGAT BAIK";
+    } else if (totalSkorAkhir <= 1150 && totalSkorAkhir >= 651){
+        eProfilRisiko.innerText = "BAIK";
+    } else if (totalSkorAkhir <= 650 && totalSkorAkhir >= 351){
+        eProfilRisiko.innerText = "CUKUP BAIK";
+    } else if (totalSkorAkhir <= 350 && totalSkorAkhir >= 151){
+        eProfilRisiko.innerText = "TIDAK BAIK";
+    } else if (totalSkorAkhir <= 150 && totalSkorAkhir >= 0){
+        eProfilRisiko.innerText = "BURUK";
+    }
+
+    const scoreBar = totalSkorAkhir / 1500 * 100;
+    eProfilRisiko.innerText += " (" + scoreBar.toFixed(2) + "%)";
+
+    document.getElementById("scoreBar").style.width = scoreBar.toFixed(2) + "%";
+}
+
 function show() {
     var showResultButton = document.getElementById("showResult");
     showResultButton.innerHTML += '<div class="spinner-border spinner-border-sm text-light ms-2" role="status"><span class="visually-hidden"></span></div>';
@@ -127,9 +198,6 @@ function show() {
                 document.getElementById("subHeader").innerText += ' ' + json.namaCabang;
 
                 function updateItem(json, itemNumber) {
-                    var itemNumberSplit = itemNumber.toString().split("");
-                    const buktiNo = 'bukti' + itemNumberSplit[0] + itemNumberSplit[1];
-                    const buktiNoJSON = json[buktiNo];
                     const item = json['item' + itemNumber];
 
                     if (item.status === true) {
@@ -149,11 +217,16 @@ function show() {
                     } else {
                         document.getElementById("target" + itemNumber).innerText = "-";
                     }
+                }
+
+                function updateBukti(json, buktiNumber) {
+                    const buktiNo = 'bukti' + buktiNumber;
+                    const buktiNoJSON = json[buktiNo];
 
                     if (buktiNoJSON === "empty") {
                         document.getElementById(buktiNo).innerText = "-";
                     } else {
-                        document.getElementById(buktiNo).innerHTML = `<a href="${buktiNoJSON.bukti}" target="_blank">${buktiNoJSON.namaBukti}</a>`;
+                        document.getElementById(buktiNo).innerHTML = `<a href="${buktiNoJSON.bukti}" target="_blank">${buktiNoJSON.namaBukti}</a><br><select onchange="changeSkorAkhir('${buktiNumber}')" class="form-select form-select-sm mt-3" id="bobot${buktiNumber}"><option value="" disabled selected>Pilih Bobot Bukti</option><option value="100">Koheren - Cukup</option><option value="50">Koheren - Tidak Cukup</option><option value="0">Tidak Koheren</option></select>`;
                     }
                 }
 
@@ -195,49 +268,8 @@ function show() {
                     } else if (risiko === "L") {
                         skorAkhir.innerText = Math.floor(skorKuesioner * 25/100); 
                     }
-                }
 
-                function setProfilRisiko () {
-                    let totalSkorAkhir = 0;
-                    const eProfilRisiko = document.getElementById("profilRisiko");
-
-                    const kuesioners = [
-                        11, 12, 13, 14, 15, 16, 17,
-                        21,
-                        31, 32, 33, 34, 35,
-                        41, 42,
-                        51, 52
-                    ];
-
-                    kuesioners.forEach(kuesioner => {
-                        const skorAkhir = parseInt(document.getElementById("skorAkhir" + kuesioner).innerText);
-                        totalSkorAkhir += skorAkhir;
-                    });
-
-                    /*
-                        1151 - 1500 = SANGAT BAIK
-                        651 - 1150 = BAIK
-                        351 - 650 = CUKUP BAIK
-                        151 - 350 = TIDAK BAIK
-                        0 - 150 = BURUK
-                    */
-
-                    if (totalSkorAkhir <= 1500 && totalSkorAkhir >= 1151) {
-                        eProfilRisiko.innerText = "SANGAT BAIK";
-                    } else if (totalSkorAkhir <= 1150 && totalSkorAkhir >= 651){
-                        eProfilRisiko.innerText = "BAIK";
-                    } else if (totalSkorAkhir <= 650 && totalSkorAkhir >= 351){
-                        eProfilRisiko.innerText = "CUKUP BAIK";
-                    } else if (totalSkorAkhir <= 350 && totalSkorAkhir >= 151){
-                        eProfilRisiko.innerText = "TIDAK BAIK";
-                    } else if (totalSkorAkhir <= 150 && totalSkorAkhir >= 0){
-                        eProfilRisiko.innerText = "BURUK";
-                    }
-
-                    const scoreBar = totalSkorAkhir / 1500 * 100;
-                    eProfilRisiko.innerText += " (" + scoreBar.toFixed(2) + "%)";
-
-                    document.getElementById("scoreBar").style.width = scoreBar.toFixed(2) + "%";
+                    localStorage.setItem("skorAkhir" + kuesioner, skorAkhir.innerText);
                 }
 
                 const itemsToUpdate = [
@@ -246,6 +278,14 @@ function show() {
                     311, 312, 313, 321, 322, 323, 331, 332, 333, 341, 342, 343, 351, 352, 353,
                     411, 412, 413, 421, 422, 423,
                     511, 512, 513, 521, 522, 523
+                ];
+
+                const buktiToUpdate = [
+                    11, 12, 13, 14, 15, 16, 17,
+                    21,
+                    31, 32, 33, 34, 35,
+                    41, 42,
+                    51, 52
                 ];
 
                 const kuesionerToUpdate = [
@@ -260,12 +300,16 @@ function show() {
                     updateItem(json, item);
                 });
 
+                buktiToUpdate.forEach(bukti => {
+                    updateBukti(json, bukti);
+                });
+
                 kuesionerToUpdate.forEach(kuesioner => {
                     setSkorKuesioner(json, kuesioner);
                     setSkorAkhir(kuesioner);
                 });
 
-                setProfilRisiko();
+                changeProfilRisiko();
             };
         }
     });    
