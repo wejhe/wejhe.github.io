@@ -1,3 +1,11 @@
+function kunciBobot() {
+    var selects = document.getElementsByTagName("select");
+    for (var i = 0; i < selects.length; i++) {
+        selects[i].setAttribute("disabled", true);
+    }
+    document.getElementById("buttonKunci").setAttribute("hidden", true);
+}
+
 function unduhSertifikat(certificate) {
     var element = document.getElementById(certificate);
     var content = element.innerHTML;

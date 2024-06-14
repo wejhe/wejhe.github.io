@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKUR - SKAI BCAS</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+    <link href="/node/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/node/bootstrap-icons/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body>
+    <script src="/node/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/node/jquery/dist/jquery.min.js"></script>
+    <script src="/localforage/dist/localforage.js"></script>
+    <script src="/dbconfig.js"></script>
+    <script src="/function.js"></script>
+
+    <div id="certificateNavbar" class="container-fluid bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col text-start fs-5" style="padding-top: 1px;">
+                    <i class="bi bi-award-fill me-2"></i><b>Sertifikat Hasil AKUR</b>
+                </div>
+                <div class="col text-end">
+                    <button id="unduhSertifikat" onclick="unduhSertifikat('certificate')" class="btn btn-primary" type="button"><i class="bi bi-envelope-arrow-down-fill me-2"></i>Unduh Sertifikat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="certificateBody" class="container-fluid py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div id="certificate" class="col-md-8 border px-5 py-5">
+                    <p class="text-center">
+                        <img src="/img/logo-blue.png" height="60px">
+                    </p>
+                    <h4 class="fw-bold text-center pt-4">SERTIFIKAT HASIL AKUR</h4>
+                    <h5 class="text-center">KC JATINEGARA JKT</h5>
+                    <h5 class="text-center" style="font-size: small;"><i>Periode AKUR 3 - 12 Juni 2024</i></h5>
+
+                    <ol type="I" class="pt-5">
+                        <h6 class="fw-bold"><li>PENILAIAN HASIL AKUR</li></h6>
+                        <p class="pe-2" style="text-align: justify;">
+                            KC JATINEGARA JKT telah menyelesaikan pengisian AKUR pada periode 3 - 12 Juni 2024
+                            dengan menyatakan 49 aktivitas telah dilakukan dari total 51 aktivitas yang tersedia.
+                            Pihak yang bersangkutan juga telah melampirkan bukti-bukti pendukung dengan rincian
+                            7 bukti dinyatakan "Koheren dan Cukup", 2 bukti dinyatakan "Koheren Namun Tidak Cukup",
+                            dan 0 bukti dinyatakan "Tidak Koheren".
+                        </p>
+                        <p class="pe-2" style="text-align: justify;">
+                            Berdasarkan hasil evaluasi dan verifikasi terhadap pengisian AKUR yang telah
+                            dilakukan oleh KC JATINEGARA JKT, dengan ini Satuan Kerja Audit Internal (selanjutnya
+                            disebut dengan SKAI) menetapkan profil risiko "BAIK" kepada yang bersangkutan.
+                        </p>
+                        <br>
+                        <h6 class="fw-bold"><li>CATATAN DAN KOMITMEN PERBAIKAN</li></h6>
+                        <ol type="a">
+                            <b><li>Verifikasi Bukti Pelaksanaan</li></b>
+                            <p class="pe-2" style="text-align: justify;">
+                                *daftar bukti yang ditolak dan alasan penolakan
+                            </p>
+                            <b><li>Komitmen Perbaikan</li></b>
+                            <p class="pe-2" style="text-align: justify;">
+                                *daftar aktivitas yang statusnya "belum dilakukan" dan komitmen perbaikannya
+                            </p>
+                        </ol>
+                    </ol>
+
+                    <p id="certificateTanggal" class="text-center pt-3">SATUAN KERJA AUDIT INTERNAL</p>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-center pt-3"><b><u>INDARAHARDJO</u></b></p>
+                            <p class="text-center pb-4" style="font-size: smaller; margin-top: -1em;">Kepala Satuan Kerja Audit Internal</p>
+                        </div>
+                        <div class="col">
+                            <p class="text-center pt-3"><b><u>JONI MARTUA J. N.</u></b></p>
+                            <p class="text-center pb-4" style="font-size: smaller; margin-top: -1em;">Kepala Departemen Audit Kantor Cabang</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">       
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
